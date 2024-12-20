@@ -19,7 +19,7 @@ namespace Agenciapp.Service.IReportServices.Reports
     public static partial class Reporte
     {
         private static Guid agencyDCubaId = Guid.Parse("4752B08A-7684-42B3-930D-FF86F496DF2F");
-        public async static Task<string> GetReporteVentas(string rangeDate, databaseContext _context, User user, IHostingEnvironment _env)
+        public async static Task<string> GetReporteVentas(string rangeDate, databaseContext _context, User user, IWebHostEnvironment _env)
         {
             using (MemoryStream MStream = new MemoryStream())
             {
@@ -2818,7 +2818,7 @@ namespace Agenciapp.Service.IReportServices.Reports
             }
         }
 
-        public async static Task<string> GetReporteVentasAdrianMyScooter(string rangeDate, databaseContext _context, User user, IHostingEnvironment _env)
+        public async static Task<string> GetReporteVentasAdrianMyScooter(string rangeDate, databaseContext _context, User user, IWebHostEnvironment _env)
         {
             List<Guid> agenciesId = new List<Guid>() { AgencyName.AdrianMyScooterFlagler, AgencyName.AdrianMyScooter57Ave, AgencyName.AdrianMyScooter67Ave };
 

@@ -1,0 +1,150 @@
+﻿@{
+    Agency agency = @ViewBag.agency;
+}
+
+<button type="button" class="btn btn-warning btn-min-width mr-1 mb-1 hidden" data-toggle="modal" data-backdrop="static" data-keyboard="false" data-target="#editClienteModal" id="editarCliente">
+    <i class="fa fa-pencil-square-o"></i> Editar
+</button>
+
+<!-- Modal -->
+<div class="modal fade text-xs-left" id="editClienteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title">Editas Cliente</h4>
+            </div>
+            <div class="modal-body" style="margin-left: 20px; margin-right: 20px">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Nombre</b> <span class="required red">*</span></label>
+                        <fieldset class="form-group position-relative ">
+                            <input name="EditName" id="EditName" class="form-control" type="text" placeholder="Nombre">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Segundo Nombre</b></label>
+                        <fieldset class="form-group position-relative ">
+                            <input name="EditName2" id="EditName2" class="form-control" type="text" placeholder="Nombre">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Primer Apellido</b> <span class="required red">*</span></label>
+                        <fieldset class="form-group position-relative ">
+                            <input name="EditLastname" id="EditLastname" class="form-control" type="text" placeholder="Apellido">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Segundo Apellidos</b></label>
+                        <fieldset class="form-group position-relative">
+                            <input name="EditLastname2" id="EditLastname2" class="form-control" type="text" placeholder="Apellido">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Teléfono</b> <span class="required red">*</span></label>
+                        <fieldset style="margin-bottom:5px;" class="form-group position-relative">
+                            <input name="EditPhone" id="EditPhone" class="form-control" type="text" placeholder="Teléfono">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Email</b></label>
+                        <fieldset style="margin-bottom:5px;" class="form-group position-relative">
+                            <input name="EditEmail" id="EditEmail" class="form-control" type="email" placeholder="Email">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>Fecha de Nacimiento</b></label>
+                            <div class="input-group date-picker">
+                                <input type="text" class="form-control" id="EditfechaNac" />
+                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                            </div>
+                            <span style="color:red">(mm/dd/aaaa)</span>
+                        </div>
+                    </div>
+                </div>
+                <div style="margin-top:10px;margin-bottom:10px;" class="form-group ">
+                    <div style="background-color: #CCC; height: 1px;"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Numero Pasaporte</b></label>
+                        <fieldset style="margin-bottom:5px;" class="form-group position-relative">
+                            <input name="ClientPassportNumber" id="ClientPassportNumber" class="form-control" type="text" placeholder="Numero Pasaporte">
+                        </fieldset>
+                    </div>
+
+                    <div class="col-md-6">
+                         <div class="form-group">
+                            <label><b>Fecha de Expiracion</b></label>
+                            <div class="input-group date-picker" >
+                                <input type="text" class="form-control" id="ClientPassportExpire" />
+                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                            </div>
+                            <span style="color:red">(mm/dd/aaaa)</span>
+                        </div>
+                    </div>
+                </div>
+                 <div style="margin-top:10px;margin-bottom:10px;" class="form-group ">
+                    <div style="background-color: #CCC; height: 1px;"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>ID</b></label>
+                        <fieldset class="form-group position-relative">
+                            <input name="EditCliID" id="EditID" class="form-control" type="text" placeholder="Número Id">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label><b>Estado</b></label>
+                        <div class="form-group ">
+                            <fieldset style="margin-bottom:5px;" class="form-group position-relative">
+                                <select class="form-control" name="EditState" id="EditClientState" style="width:100%" placeholder="Estado">
+                                    <option></option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Ciudad</b></label>
+                        <fieldset class="form-group position-relative">
+                            <select name="EditCity" id="EditClientCity" class="form-control" style="width:100%" placeholder="Ciudad">
+                                <option></option>
+                            </select>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dirección</b></label>
+                        <div class="form-group  ">
+                            <textarea placeholder="Dirección" name="EditAddress" id="EditAddress" class="form-control"></textarea>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Address" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Código Postal</b></label>
+                        <fieldset class="form-group position-relative">
+                            <input name="EditZip" id="EditZip" class="form-control" type="text" placeholder="Zip">
+                        </fieldset>
+                    </div>
+                </div>                
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-min-width mr-1 mb-1" id="cancelarEditCliente" data-dismiss="modal">
+                    <i class="ft-x"></i> Cancelar
+                </button>
+                <button type="button" class="btn btn-success btn-min-width mr-1 mb-1" id="guardarEditCliente" data-dismiss="modal">
+                    <i class="fa fa-check-square-o"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

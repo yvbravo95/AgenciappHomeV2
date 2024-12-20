@@ -1,0 +1,45 @@
+﻿@{
+
+}
+
+<div class="modal fade text-xs-left" id="ModalCancel" tabindex="-1" role="dialog" aria-labelledby="myModalLabel4"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xs" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel4">Cancelar Trámite</h4>
+            </div>
+            <div class="modal-body">
+                <h6>¿Qué desea hacer?</h6>
+                <div class="row">
+                    <div class="col-md-12">
+                        @if (ViewData["Role"].Equals("Agencia"))
+                        {
+                            <fieldset name="optionCredito">
+                                <input type="radio" name="checkCancelTramite" value="credito">
+                                <label for="input-radio-15">Asignar crédito al cliente</label>
+                            </fieldset>
+                            <fieldset name="optionDevolucion">
+                                <input type="radio" name="checkCancelTramite" value="devolucion">
+                                <label for="input-radio-16">Crear devolución</label>
+                            </fieldset>
+                        }
+                        <fieldset name="optionCancelar">
+                            <input type="radio" name="checkCancelTramite" value="cancelar" checked>
+                            <label for="input-radio-17">Solo Cancelar</label>
+                        </fieldset>
+                    </div>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn grey btn-outline-secondary" data-dismiss="modal">Cerrar</button>
+                <button type="button" class="btn btn-outline-primary" data-dismiss="modal"
+                    id="btnCancelTramite">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

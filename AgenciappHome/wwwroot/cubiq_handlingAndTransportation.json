@@ -1,0 +1,191 @@
+{
+  "Minoristas": {
+    "Cost": {
+      "Hav": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value": 0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ],
+      "Others": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value":0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ]
+    },
+    "Sale": {
+      "Hav": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value": 0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ],
+      "Others": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value": 0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ]
+    }
+  },
+  "Cubiq": {
+    "Cost": {
+      "Hav": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value": 0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ],
+      "Others": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value": 0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ]
+    },
+    "Sale": {
+      "Hav": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value": 0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ],
+      "Others": [
+        {
+          "Value": 0,
+          "InitKg": 0,
+          "EndKg": 1.5
+        },
+        {
+          "Value": 0,
+          "InitKg": 1.5,
+          "EndKg": 10
+        },
+        {
+          "Value": 0,
+          "InitKg": 10,
+          "EndKg": 20
+        },
+        {
+          "Value": 0,
+          "InitKg": 20,
+          "EndKg": 0
+        }
+      ]
+    }
+  }
+  
+}

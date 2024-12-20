@@ -15,7 +15,7 @@ namespace Agenciapp.Service.IReportServices.Reports
 {
     public static partial class Reporte
     {
-        public async static Task<string> GetReporteLiquidacion(string strdate, User aUser, databaseContext _context, IHostingEnvironment _env)
+        public async static Task<string> GetReporteLiquidacion(string strdate, User aUser, databaseContext _context, IWebHostEnvironment _env)
         {
             using (MemoryStream MStream = new MemoryStream())
             {

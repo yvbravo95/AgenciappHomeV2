@@ -1,0 +1,48 @@
+﻿body {
+    background-color: white;
+    margin:5px;
+}
+
+#row1{
+    border-bottom-style:solid;
+    border-width:2px;
+}
+#row2{
+    border-style:solid;
+    border-width:2px;
+    border-top-width:0px;
+}
+
+#row1col1 {
+    border-right-style: solid;
+    border-width: 2px;
+    display: inline-block;
+    width:10%;
+}
+
+#row1col2 {
+    border-right-style: solid;
+    border-width: 2px;
+    display: inline-block;
+    width: 10%;
+}
+
+#row1col3 {
+    display: inline-block;
+    width:75%;
+}
+
+label{
+    color:black;
+}
+
+#row2elem1 {
+    border-left-style: solid;
+    border-bottom-style: solid;
+    border-width: 2px;
+}
+
+/*div {
+    border-style: solid;
+    border-width: 2px;
+}*

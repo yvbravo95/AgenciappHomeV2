@@ -1,0 +1,152 @@
+﻿
+<script>
+    $(document).ready(function () {
+        $(".hide-search-newContactProvince").select2({
+            minimumResultsForSearch: Infinity,
+            placeholder: "Provincia",
+        });
+        $('#nuevoContactPhoneMovil').mask('(000)-000-0000', {
+            placeholder: "(000)-000-0000"
+        });
+        $('#nuevoContactPhoneHome').mask('(000)-000-0000', {
+            placeholder: "(000)-000-0000"
+        });
+        $('#nuevoContactCI').mask('00000000000', {
+            placeholder: "Carnet de Identidad"
+        });
+        $('#nuevoContactMunicipio').select2({
+            placeholder: "Municipio"
+        });
+
+        $("#cancelarNuevoContacto").click(cleanNuevoContacto);
+        $("#guardarNuevoContacto").click(function (e) {
+            if (validateNuevoContacto()) {
+                if (document.location.pathname == "/store/create") {
+                    selectedClient = $(".select2-placeholder-selectClient").val();
+                }
+                var source = [
+                    selectedClient,    // id del cliente al cual se asocia hay q declararla en donde se use este script
+                    $('#nuevoContactName').val(),
+                    $('#nuevoContactLastName').val(),
+                    $('#nuevoContactPhoneMovil').val(),
+                    $('#nuevoContactPhoneHome').val(),
+                    $('#nuevoContactDir').val(),
+                    $('#nuevoContactProvincia').val(),
+                    $('#nuevoContactMunicipio').val(),
+                    $('#nuevoContactReparto').val(),
+                    $('#nuevoContactCI').val(),
+                    $(e.target).data('type')
+                ]
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Contacts/AddContact",
+                    data: JSON.stringify(source),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    async: false,
+                    success: function (response) {
+                        if (response.success) {
+                            if (document.location.pathname == "/store/create") {
+                                // add option to select
+                                const name = $('#nuevoContactName').val();
+                                const lastName = $('#nuevoContactLastName').val();
+                                const phone = $('#nuevoContactPhoneMovil').val();
+                                const fullName = `${phone}-${name} ${lastName}`;
+                                var newOption = new Option(fullName, response["idContact"], true, true);
+                                $('.select2-placeholder-selectContact').append(newOption);
+                                $('.select2-placeholder-selectContact').val(response["idContact"]).trigger('select2:select');
+                                toastr.success("El cliente " + $("#Name").val() + " se ha creado satisfactoriamente");
+                                $.unblockUI();
+                            }
+                            else {
+                                document.location = document.location.pathname + "?msg=El Contacto " + response["name"] + " se ha creado satisfactoriamente.&idClient=" + selectedClient + "&idContact=" + response["idContact"];
+                            }
+                        }
+                        else {
+                            showErrorMessage("ERROR", response.msg);
+                            if (source[10] === "Cubiq") {
+                                setTimeout(() => { location.reload(); }, 1000)
+                            }
+                        }
+                    },
+                    failure: function (response) {
+                        showErrorMessage("ERROR", response.responseText);
+                    },
+                    error: function (response) {
+                        showErrorMessage("ERROR", response.responseText);
+                    }
+                });
+                cleanNuevoContacto();
+            }
+        });
+
+
+        var validateNuevoContacto = function () {
+            if ($("#nuevoContactName").val() == "") {
+                showWarningMessage("Atención", "El campo Nombre no puede estar vacío.");
+                return false;
+            } else if ($("#nuevoContactLastName").val() == "") {
+                showWarningMessage("Atención", "El campo Apellidos no puede estar vacío.");
+                return false;
+            } else if ($("#nuevoContactPhoneMovil").val() == "" && $("#nuevoContactPhoneHome").val() == "") {
+                showWarningMessage("Atención", "Debe introducir al menos un teléfono de contacto.");
+                return false;
+            }
+
+            else if ($("#nuevoContactCI").val().length > 0 && $("#nuevoContactCI").val().length != 11) {
+                showWarningMessage("Atención", "El campo Carnet de Identidad debe poseer 11 dígitos.");
+                    return false;
+            }
+            else if ($("#nuevoContactDir").val() == "") {
+                showWarningMessage("Atención", "El campo Dirección no puede estar vacío");
+                return false;
+            } else if ($("#nuevoContactProvincia").val() == "") {
+                showWarningMessage("Atención", "El campo Provincia no puede estar vacío.");
+                return false;
+            } else if ($("#nuevoContactMunicipio").val() == "") {
+                showWarningMessage("Atención", "El campo Municipio no puede estar vacío.");
+                return false;
+            }
+
+            return true;
+        };
+        var cleanNuevoContacto = function () {
+            $('#nuevoContactName').val("");
+            $('#nuevoContactLastName').val("");
+            $('#nuevoContactPhoneMovil').val("");
+            $('#nuevoContactPhoneHome').val("");
+            $('#nuevoContactDir').val("");
+            $('nuevoContactMunicipio').val("").trigger("change");;
+            $('.hide-search-newContactProvince').val("").trigger("change");;
+            $('#nuevoContactReparto').val("");
+        };
+
+        $(".select2-container--default").attr("style", "width: 100%;");
+
+    });
+
+    var selectNuevoMunicipios = function () {
+        var provincia = $("#nuevoContactProvincia").val();
+        if (!provincia)
+            return;
+
+        $.ajax({
+            url: "/Provincias/Municipios?nombre=" + provincia,
+            type: "POST",
+            dataType: "json",
+            success: function (response) {
+                var municipios = $("#nuevoContactMunicipio");
+                municipios.empty();
+                municipios.append(new Option())
+                for (var i in response) {
+                    var m = response[i];
+                    municipios.append(new Option(m, m))
+                }
+            }
+        })
+    }
+
+    $(document).on("change", "#nuevoContactProvincia", selectNuevoMunicipios);
+
+</script>

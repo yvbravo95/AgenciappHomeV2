@@ -1,0 +1,110 @@
+﻿
+<button type="button" id="nuevoContacto" class="btn btn-primary btn-min-width mr-1 mb-1" style="margin-left:15px;" data-toggle="modal" data-target="#nuevoContactoModal" disabled="disabled">
+    <i class="ft-user-plus"> Nuevo Contacto</i>
+</button>
+<!-- Modal -->
+<div class="modal fade text-xs-left" id="nuevoContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">Nuevo Contacto</h4>
+            </div>
+            <div class="modal-body" style="margin-left: 20px; margin-right: 20px">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label><b>Nombres</b></label>
+                            <fieldset class="form-group position-relative has-icon-left">
+                                <input class="form-control" id="nuevoContactName" placeholder="Nombre" name="inputContactName" />
+                                <div class="form-control-position">
+                                    <span style="color:red">*</span>
+                                </div>
+                                <span name="inputContactName" class="text-danger"></span>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group   ">
+                            <label><b>Apellidos</b></label>
+                            <fieldset class="form-group position-relative has-icon-left">
+                                <input class="form-control" id="nuevoContactLastName" placeholder="Apellidos" name="inputContactLastName" />
+                                <div class="form-control-position">
+                                    <span style="color:red">*</span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                            <label><b>Teléfono Primario</b></label>
+                            <fieldset class="form-group position-relative has-icon-left">
+                                <input class="form-control" id="nuevoContactPhoneMovil" placeholder="Telef. Movil" name="nuevoContactPhoneMovil" />
+                                <div class="form-control-position">
+                                    <span style="color:red">*</span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                            <label><b>Teléfono Secundario</b></label>
+                            <fieldset class="form-group position-relative has-icon-left">
+                                <input class="form-control" id="nuevoContactPhoneHome" placeholder="Telef. Casa" name="nuevoContactPhoneHome" />
+                                <div class="form-control-position">
+                                    <span style="color:red">*</span>
+                                </div>
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group  ">
+                    <label><b>Direccción</b></label>
+                    <textarea  class="form-control" name="contactCalle" id="nuevoContactDir" placeholder="Dirección"></textarea>
+
+                </div>
+                
+                <div class="form-group  ">
+                    <label><b>Provincia</b></label>
+                    <select class="form-control hide-search-newContactProvince" style="display:none" id="nuevoContactProvincia" name="nuevoContactProvincia">
+                        <option value="">Seleccione una Provincia</option>
+                        @if (ViewBag.provincias != null)
+                        {
+                            foreach (Provincia provincia in ViewBag.provincias)
+                            {
+                                <option value="@provincia.nombreProvincia">@provincia.nombreProvincia</option>
+                            }
+
+                        }
+                    </select>
+                </div>
+                <div class="form-group  ">
+                    <label><b>Municipio</b></label>
+                    <fieldset class="form-group position-relative has-icon-left">
+                        <input class="form-control" name="nuevoContactMunicipio" id="nuevoContactMunicipio" placeholder="Municipio" />
+                        <div class="form-control-position">
+                            <span style="color:red">*</span>
+                        </div>
+                    </fieldset>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-min-width mr-1 mb-1" id="cancelarNuevoContacto" data-dismiss="modal">
+                    <i class="ft-x"></i> Cancelar
+                </button>
+                <button type="button" class="btn btn-success btn-min-width mr-1 mb-1" id="guardarNuevoContacto">
+                    <i class="fa fa-check-square-o"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+

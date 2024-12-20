@@ -1,0 +1,149 @@
+﻿
+<script>
+    $(document).ready(function () {
+        
+        $(".hide-search-newContactProvince").select2({
+            minimumResultsForSearch: Infinity,
+            placeholder: "Provincia",
+        });
+        $('#nuevoContactPhoneMovil').mask('0000000000', {
+            placeholder: "Ej: 5300000000"
+        });
+        $('#nuevoContactPhoneHome').mask('0000000000', {
+            placeholder: "0000000000"
+        });
+        $('#nuevoContactCI').mask('00000000000', {
+            placeholder: "Carnet de Identidad"
+        });
+        $('#nuevoContactMunicipio').select2({
+            placeholder: "Municipio"
+        });
+
+        $('#nuevoContacto').on('click', function(){
+            $('#nuevoContactoModal').modal('show');
+        })
+
+        $("#cancelarNuevoContacto").click(cleanNuevoContacto);
+        $("#guardarNuevoContacto").click(function (e) {
+            if (validateNuevoContacto()) {
+                $('#nuevoContactoModal').modal('hide');
+                $(".modal-backdrop").remove();
+                var source = [
+                    selectedClient,    // id del cliente al cual se asocia hay q declararla en donde se use este script
+                    $('#nuevoContactName').val(),
+                    $('#nuevoContactLastName').val(),
+                    $('#nuevoContactPhoneMovil').val(),
+                    $('#nuevoContactPhoneHome').val(),
+                    $('#nuevoContactDir').val(),
+                    $('#nuevoContactProvincia').val(),
+                    $('#nuevoContactMunicipio').val(),
+                    $('#nuevoContactReparto').val(),
+                    $('#nuevoContactCI').val(),
+                    $(e.target).data('type')
+                ]
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Contacts/AddContact",
+                    data: JSON.stringify(source),
+                    dataType: 'json',
+                    contentType: 'application/json',
+                    async: false,
+                    success: function (response) {
+                        if (response.success) {
+                            document.location = document.location.pathname + "?msg=El Destinatario " + response["name"] + " se ha creado satisfactoriamente.&idClient=" + selectedClient + "&idContact=" + response["idContact"];
+                        }
+                        else {
+                            showErrorMessage("ERROR", response.msg);
+                            if (source[10] === "Cubiq") {
+                                setTimeout(() => { location.reload(); }, 1000)
+                            }
+                        }
+                    },
+                    failure: function (response) {
+                        showErrorMessage("ERROR", response.responseText);
+                    },
+                    error: function (response) {
+                        showErrorMessage("ERROR", response.responseText);
+                    }
+                });
+                cleanNuevoContacto();
+            }
+        });
+
+
+        var validateNuevoContacto = function () {
+            if ($("#nuevoContactName").val() == "") {
+                showWarningMessage("Atención", "El campo Nombre no puede estar vacío.");
+                return false;
+            } else if ($("#nuevoContactLastName").val() == "") {
+                showWarningMessage("Atención", "El campo Apellidos no puede estar vacío.");
+                return false;
+            } else if ($("#nuevoContactPhoneMovil").val().length == 0 && $("#nuevoContactPhoneHome").val().length == 0) {
+                showWarningMessage("Atención", "Debe introducir al menos un teléfono de contacto.");
+                return false;
+            }
+            else if($("#nuevoContactPhoneMovil").val().length != 0 && $("#nuevoContactPhoneMovil").val().length != 10){
+                showWarningMessage("Atención", "El número de teléfono primario debe ser de 10 dígitos");
+                return false;
+            }
+            else if($("#nuevoContactPhoneHome").val().length != 0 && $("#nuevoContactPhoneHome").val().length != 10){
+                showWarningMessage("Atención", "El número de teléfono secundario debe ser de 10 dígitos");
+                return false;
+            }
+            else if ($("#nuevoContactCI").val().length != 11) {
+                showWarningMessage("Atención", "El campo Carnet de Identidad debe poseer 11 dígitos.");
+                    return false;
+            }
+            else if ($("#nuevoContactDir").val().length < 8) {
+                showWarningMessage("Atención", "El campo Dirección debe ser de ocho caracteres en adelante");
+                return false;
+            } else if ($("#nuevoContactProvincia").val() == "") {
+                showWarningMessage("Atención", "El campo Provincia no puede estar vacío.");
+                return false;
+            } else if ($("#nuevoContactMunicipio").val() == "") {
+                showWarningMessage("Atención", "El campo Municipio no puede estar vacío.");
+                return false;
+            }
+
+            return true;
+        };
+        var cleanNuevoContacto = function () {
+            $('#nuevoContactName').val("");
+            $('#nuevoContactLastName').val("");
+            $('#nuevoContactPhoneMovil').val("");
+            $('#nuevoContactPhoneHome').val("");
+            $('#nuevoContactDir').val("");
+            $('nuevoContactMunicipio').val("").trigger("change");;
+            $('.hide-search-newContactProvince').val("").trigger("change");;
+            $('#nuevoContactReparto').val("");
+        };
+
+        $(".select2-container--default").attr("style", "width: 100%;");
+
+    });
+
+    var selectNuevoMunicipios = function () {
+        var provincia = $("#nuevoContactProvincia").val();
+        if (!provincia)
+            return;
+
+        $.ajax({
+            url: "/Provincias/Municipios?nombre=" + provincia,
+            type: "POST",
+            dataType: "json",
+            success: function (response) {
+                var municipios = $("#nuevoContactMunicipio");
+                municipios.empty();
+                municipios.append(new Option())
+                for (var i in response) {
+                    var m = response[i];
+                    municipios.append(new Option(m, m))
+                }
+            }
+        })
+    }
+
+    $(document).on("change", "#nuevoContactProvincia", selectNuevoMunicipios);
+
+</script>

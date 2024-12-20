@@ -1,0 +1,27 @@
+﻿.plane-container {
+    width: 100%;
+    height: 30px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    margin-bottom: 10px;
+}
+
+.plane {
+    position: absolute;
+    top: 50%;
+    left: -100px;
+    transform: translateY(-50%) rotate(45deg);
+    animation: fly 8s linear infinite;
+    font-size: 2rem;
+}
+
+@keyframes fly {
+    0% {
+        left: -100px;
+    }
+
+    100% {
+        left: 100%;
+    }
+}

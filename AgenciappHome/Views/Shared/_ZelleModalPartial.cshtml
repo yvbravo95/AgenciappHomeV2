@@ -1,0 +1,40 @@
+﻿@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+
+<div class="modal fade text-xs-left" id="zelleModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h5 class="modal-title" id="myModalLabel1">Seleccione el pago zelle:</h5>
+            </div>
+            <div class="modal-body">
+                <div id="containerZelle">
+                    <table class="table" id="tblZelle">
+                        <thead>
+                            <tr>
+                                <th style="width:5px;"></th>
+                                <th>Fecha</th>
+                                <th>Código</th>
+                                <th>Cliente</th>
+                                <th>Monto</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn green btn-outline-danger" data-dismiss="modal" id="btnCancellZelle">Cancelar</button>
+                <button type="button" class="btn green btn-outline-success" data-dismiss="modal" id="btnConfirmZelle">Confirmar</button>
+            </div>
+        </div>
+    </div>
+</div>

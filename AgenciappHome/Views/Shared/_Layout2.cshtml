@@ -1,0 +1,725 @@
+﻿@using Microsoft.AspNetCore.Http
+@using AgenciappHome.Controllers.Class
+@inject IHttpContextAccessor httpContextAccessor
+@{
+    Guid agencyId = Guid.Parse(ViewData["agencyId"].ToString());
+    var agencyDCubaId = Guid.Parse("4752B08A-7684-42B3-930D-FF86F496DF2F");
+
+}
+
+<!DOCTYPE html>
+<html class="loading" lang="en" data-textdirection="ltr">
+<!-- BEGIN: Head-->
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=0, minimal-ui">
+    <meta name="description" content="Stack admin is super flexible, powerful, clean &amp; modern responsive bootstrap 4 admin template with unlimited possibilities.">
+    <meta name="keywords" content="admin template, stack admin template, dashboard template, flat admin template, responsive admin template, web app">
+    <meta name="author" content="PIXINVENT">
+    <title>@ViewData["Title"] - AgenciApp</title>
+    <link rel="apple-touch-icon" href="~/AdminTemplate4/app-assets/images/ico/apple-icon-120.png">
+    <link rel="shortcut icon" type="image/x-icon" href="~/logo.png">
+    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i%7COpen+Sans:300,300i,400,400i,600,600i,700,700i" rel="stylesheet">
+
+    <!-- BEGIN: Vendor CSS-->
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/vendors/css/vendors.min.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/vendors/css/pickers/daterange/daterangepicker.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/vendors/css/forms/selects/select2.min.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/vendors/css/forms/quill/quill.snow.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/vendors/css/extensions/dragula.min.css">
+    <!-- END: Vendor CSS-->
+    <!-- BEGIN: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/css/bootstrap-extended.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/css/colors.css">
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/css/components.css">
+    <!-- END: Theme CSS-->
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/app-assets/vendors/css/extensions/toastr.css">
+
+    <!-- BEGIN: Custom CSS-->
+    <link rel="stylesheet" type="text/css" href="~/AdminTemplate4/assets/css/style.css">
+    <!-- END: Custom CSS-->
+    @RenderSection("Style", required: false)
+</head>
+<!-- END: Head-->
+<!-- BEGIN: Body-->
+
+<body class="vertical-layout vertical-menu content-left-sidebar todo-application  fixed-navbar" data-open="click" data-menu="vertical-menu" data-col="content-left-sidebar">
+
+    <!-- BEGIN: Header-->
+    <nav class="header-navbar navbar-expand-md navbar navbar-with-menu fixed-top navbar-semi-dark navbar-shadow">
+        <div class="navbar-wrapper">
+            <div class="navbar-header">
+                <ul class="nav navbar-nav flex-row">
+                    <li class="nav-item mobile-menu d-md-none mr-auto"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="feather icon-menu font-large-1"></i></a></li>
+                    @if (ViewData["Role"].Equals("EmpleadoCuba") || ViewData["Role"].Equals("DistributorCuba") || ViewData["Role"].Equals("Empleado"))
+                    {
+                        <li class="nav-item">
+                            <a href="/home/indexempleado" class="navbar-brand" style="width:200px;">
+                                <img width="30" height="30" src="~/logo.png">
+                                <h4 style="padding-left:6px" class="brand-text">AgenciApp</h4>
+                            </a>
+                        </li>
+                    }
+                    else
+                    {
+                        <li class="nav-item">
+                            <a href="/" class="navbar-brand" style="width:200px;">
+                                <img width="30" height="30" src="~/logo.png">
+                                <h4 style="padding-left:6px" class="brand-text">AgenciApp</h4>
+                            </a>
+                        </li>
+                    }
+                    <li class="nav-item d-md-none"><a class="nav-link open-navbar-container" data-toggle="collapse" data-target="#navbar-mobile"><i class="fa fa-ellipsis-v"></i></a></li>
+                </ul>
+            </div>
+            <div class="navbar-container content">
+                <div class="collapse navbar-collapse" id="navbar-mobile">
+                    <ul class="nav navbar-nav mr-auto float-left">
+                        <li class="nav-item d-none d-md-block"><a class="nav-link nav-menu-main menu-toggle hidden-xs" href="#"><i class="feather icon-menu"></i></a></li>
+                        <li class="nav-item hidden-sm-down">
+                            <span id="agency" class="nav-link nav-menu-main menu-toggle hidden-xs" style="margin-top: 5px"></span>
+                            <span id="office" class="nav-link nav-menu-main menu-toggle hidden-xs" style="margin-top:-5px"></span>
+                        </li>
+                    </ul>
+                    <ul class="nav navbar-nav float-right">
+                        <li class="dropdown dropdown-notification nav-item">
+                            <a class="nav-link nav-link-label" href="#" data-toggle="dropdown"><i class="ficon feather icon-bell"></i><span class="badge badge-pill badge-danger badge-up" name="cantNotifications">0</span></a>
+                            <ul class="dropdown-menu dropdown-menu-media dropdown-menu-right">
+                                <li class="dropdown-menu-header">
+                                    <h6 class="dropdown-header m-0"><span class="grey darken-2">Notificaciones</span></h6>
+                                </li>
+                                <li class="scrollable-container media-list" id="notificationContainer">
+
+                                </li>
+                                <li class="dropdown-menu-footer"><a class="dropdown-item text-muted text-center" href="javascript:void(0)" id="readAllNotify">Leer todas las notificaciones</a></li>
+                            </ul>
+                        </li>
+                        @if (ViewData["Role"].Equals("Agencia"))
+                        {
+                            <li class="dropdown dropdown-user nav-item">
+                                <a style="margin-top:8px;display:none" class=" nav-link dropdown-user-link" href="#" id="btnReturnAgency"><i class="fa fa-share"> Regresar</i></a>
+                            </li>
+                        }
+                        @if (!ViewData["Role"].Equals("EmpleadoCuba") && !ViewData["Role"].Equals("DistributorCuba"))
+                        {
+                            @if (ViewBag.isChangeOffice == true)
+                            {
+                                <li class="dropdown dropdown-user nav-item">
+                                    <a style="margin-top:8px" class=" nav-link dropdown-user-link" href="/Account/SelectAgency?toReturn=@ViewData["URLSection"]" data-toggle="tooltip" data-placement="left" data-original-title="Cambiar oficina"><i class="ft-briefcase "> Cambiar oficina</i></a>
+                                </li>
+                            }
+
+                        }
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <li class="dropdown dropdown-user nav-item" style="margin-top:8px">
+                                <a href="#" data-toggle="dropdown" class="dropdown-toggle nav-link dropdown-user-link" aria-expanded="false">
+                                    <span class="ft-unlock"></span>
+                                    <span class="user-name">@User.Identity.Name</span>
+                                </a>
+                                <div class="dropdown-menu dropdown-menu-right">
+                                    @if (ViewData["Role"].Equals("Agencia"))
+                                    {
+                                        <a href="/Account/EditarAgencia" class="dropdown-item">
+                                            <i class="ft-user"></i> Editar Agencia
+                                        </a>
+                                        <div class="dropdown-divider"></div>
+
+                                    }
+                                    <a href="/Account/AccountSetting" class="dropdown-item">
+                                        <i class="ft-user"></i> Mi Perfil
+                                    </a>
+                                    <div class="dropdown-divider"></div>
+                                    <form id="logoutForm" method="post" action="/Account/Logout" style="display:none">
+                                        <input type="submit" value="Logout">
+                                    </form>
+                                    <a href="javascript:document.getElementById('logoutForm').submit()" class="dropdown-item">
+                                        <i class="ft-power"></i> Cerrar Sesión
+                                    </a>
+                                </div>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item"><a href="/account/login" class="nav-link">Autenticarse</a></li>
+                        }
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- END: Header-->
+    <!-- BEGIN: Main Menu-->
+    <div class="main-menu menu-fixed menu-dark menu-accordion menu-shadow" data-scroll-to-active="true">
+        <div class="main-menu-content">
+            @if (agencyId == agencyDCubaId)
+            {
+                <div>
+                    <img src="~/images/LogosAgency/LogoMenu/dcuba.jpeg" alt="Alternate Text" style="width:100%" />
+                </div>
+            }
+            <ul id="menu" style="display:none" data-menu="menu-navigation" class="navigation navigation-main">
+                @if (ViewData["Role"].Equals("EmpleadoCuba") || ViewData["Role"].Equals("DistributorCuba") || ViewData["Role"].Equals("Empleado"))
+                {
+                    <li class="nav-item  ">
+                        <a href="#"><i class="feather icon-home"></i><span data-i18n="" class="menu-title">Inicio</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if(ViewData["Module"] == "HomeEmpleado") { <Text>active</Text>}"><a href="/home/indexempleado"><i class="ft-home"></i><span data-i18n="" class="menu-title">Index</span></a></li>
+                            @if (ViewData["Role"].Equals("Empleado"))
+                            {
+                                <li class="nav-item @if(ViewBag.Module != null && ViewBag.Module == "Products") { <Text>active</Text>}"><a href="/report/productsempleado"><i class="icon-paper-clip"></i><span data-i18n="" class="menu-title">Inventario de productos</span></a></li>
+                            }
+                        </ul>
+                    </li>
+                }
+                @if (!ViewData["Role"].Equals("EmpleadoCuba") && !ViewData["Role"].Equals("DistributorCuba"))
+                {
+                    <li class="nav-item  " id="indexAdmin">
+                        <a href="/"><i class="feather icon-home"></i><span data-i18n="" class="menu-title">Inicio</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if(ViewData["Module"] == "Home") { <Text>active</Text>}"><a href="/home/index"><i class="feather icon-home"></i><span data-i18n="" class="menu-title">General</span></a></li>
+                            <li class=" nav-item @if(ViewData["Module"] == "Sale") { <Text>active</Text>} "><a asp-controller="analytics" asp-action="sale"><i class="fa fa-dollar"></i><span data-i18n="" class="menu-title">Ventas</span></a></li>
+                            <li class=" nav-item @if(ViewData["Module"] == "Transacciones") { <Text>active</Text>} "><a asp-controller="analytics" asp-action="transactions"><i class="fa fa-line-chart"></i><span data-i18n="" class="menu-title">Transacciones</span></a></li>
+                            <li class="nav-item @if(ViewBag.Module != null && ViewBag.Module == "Products") { <Text>active</Text>}"><a href="/report/productsempleado"><i class="icon-paper-clip"></i><span data-i18n="" class="menu-title">Inventario de productos</span></a></li>
+                        </ul>
+                    </li>
+
+                    <li id="menuCuentas" class="nav-item  ">
+                        <a href="#"><i class="fa fa-folder"></i><span data-i18n="" class="menu-title">Cuentas</span></a>
+                        <ul id="otrosTramites" class="menu-content">
+                            <li id="menuCuentasxCobrar" class="nav-item ">
+                                <a asp-area="" asp-controller="servicioxCobrars" asp-action="#"><i class="fa fa-folder-o"></i> Por Cobrar</a>
+                                <ul class="menu-content">
+                                    <li class=" nav-item  @if (ViewData["URLSection"] == "/Servicios/Index")
+                                        { <text>active</text>} "><a href="/servicioxcobrars/"><i class="ft-clock"></i><span data-i18n="" class="menu-title">Servicios x Cobrar</span></a></li>
+                                    <li class=" nav-item @if (ViewData["URLSection"] == "/Facturas/Index")
+                                        { <text>active</text>}"><a href="/facturas/"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Facturas</span></a></li>
+                                </ul>
+                            </li>
+                            <li class="nav-item ">
+                                <a asp-area="" asp-controller="serviciosxpagar" asp-action="#"><i class="fa fa-folder-o"></i> Por Pagar</a>
+                                <ul class="menu-content">
+                                    <li class=" nav-item  @if (ViewData["URLSection"] == "/ServiciosxPagar/Index")
+                                        { <text>active</text>} "><a href="/serviciosxpagar/"><i class="ft-clock"></i><span data-i18n="" class="menu-title">Servicios x Pagar</span></a></li>
+                                    <li class=" nav-item @if (ViewData["URLSection"] == "/Bills/Index")
+                                        { <text>active</text>}"><a href="/bills/"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Bills</span></a></li>
+                                    <li class=" nav-item @if (ViewData["URLSection"] == "/ServiciosxPagar/GetAudit")
+                                        { <text>active</text>}"><a href="/serviciosxPagar/getAudit"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Auditoría</span></a></li>
+                                
+                                </ul>
+                            </li>
+                            <li class="nav-item ">
+                                <a asp-area="" asp-controller="refundlogs" asp-action="index"><i class="fa fa-folder-o"></i>Devoluciones</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="nav-item ">
+                        <a asp-area="" asp-controller="Clients" asp-action="#"><i class="fa fa-user"></i>Clientes</a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if(ViewData["Module"] == "ListarClientes") { <Text>active</Text>}"><a href="/clients/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar clientes</span></a></li>
+                            @*<li class=" nav-item @if(ViewData["Module"] == "AdicionarClientes") { <Text>active</Text>}"><a href="/Clients/Create"><i class="fa fa-user-plus"></i><span data-i18n="" class="menu-title">Adicionar cliente</span></a></li>*@
+                            @*<li class=" nav-item @if(ViewData["Module"] == "ImportarClientes") { <Text>active</Text>}"><a href="/clients/importclient"><i class="ft-upload"></i><span data-i18n="" class="menu-title">Importar clientes</span></a></li>*@
+                            @*<li class=" nav-item @if(ViewData["Module"] == "ExportarClientes") { <Text>active</Text>}"><a href="/clients/exportclient"><i class="ft-download"></i><span data-i18n="" class="menu-title">Exportar clientes</span></a></li>*@
+                            <li class=" nav-item @if(ViewData["URLSection"] == "/tasks/alltasks") { <Text>active</Text>}"><a href="/tasks/alltasks"><i class="fa fa-file-text-o white"></i><span data-i18n="" class="menu-title">Tareas</span></a></li>
+                        </ul>
+                    </li>
+                    @if (ViewData["Role"].Equals("Administrador"))
+                    {
+                        <li>
+                            <a><i class="fa fa-dashboard"></i>Administración</a>
+                            <ul class="menu-content">
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Users" asp-action="#"><i class="fa fa-group"></i>Usuarios</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["Module"] == "ListarUsuarios") { <Text>active</Text>}"><a href="/users/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar usuarios</span></a></li>
+                                        <li class=" nav-item @if(ViewData["Module"] == "CrearUsuarios") { <Text>active</Text>}"><a href="/users/create"><i class="fa fa-user-plus"></i><span data-i18n="" class="menu-title">Adicionar usuario</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Contacts" asp-action="#"><i class="fa fa-user-o"></i>Contactos</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["Module"] == "ListarContactos") { <Text>active</Text>}"><a href="/contacts/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar contactos</span></a></li>
+                                        <li class=" nav-item @if(ViewData["Module"] == "CrearContactos") { <Text>active</Text>}"><a href="/contacts/create"><i class="ft-user-plus"></i><span data-i18n="" class="menu-title">Adicionar contacto</span></a></li>
+                                        <li class=" nav-item @if(ViewData["Module"] == "ImportarContactos") { <Text>active</Text>}"><a href="/contacts/importcontact"><i class="ft-upload"></i><span data-i18n="" class="menu-title">Importar contactos</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Carriers" asp-action="#"><i class="fa fa-user-secret"></i>Carriers</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["Module"] == "ListarCarrier") { <Text>active</Text>}"><a href="/carriers/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar carriers</span></a></li>
+                                        <li class=" nav-item @if(ViewData["Module"] == "CrearCarrier") { <Text>active</Text>}"><a href="/carriers/create"><i class="fa fa-street-view"></i><span data-i18n="" class="menu-title">Adicionar carrier</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Offices" asp-action="#"><i class="fa fa-building-o"></i>Oficinas</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["Module"] == "ListarOficinas") { <Text>active</Text>}"><a href="/offices/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar oficinas</span></a></li>
+                                        <li class=" nav-item @if(ViewData["Module"] == "AdicionarOficinas") { <Text>active</Text>}"><a href="/offices/create"><i class="fa fa-building-o"></i><span data-i18n="" class="menu-title">Adicionar oficinas</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Agencies" asp-action="#"><i class="fa fa-building"></i>Agencias</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["Module"] == "ListarAgencia") { <Text>active</Text>} "><a href="/agencies/index "><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar agencias</span></a></li>
+                                        <li class=" nav-item @if(ViewData["Module"] == "CrearAgencia") { <Text>active</Text>}"><a href="/agencies/create"><i class="fa fa-building"></i><span data-i18n="" class="menu-title">Adicionar agencia</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="ValorAduanals" asp-action="#"><i class="fa fa-balance-scale"></i>Valores Aduanales</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["Module"] == "ListarValorAduanal") { <Text>active</Text>}"><a href="/valoraduanals/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar valores aduanales</span></a></li>
+                                        <li class=" nav-item @if(ViewData["Module"] == "AdicionarValorAduanal") { <Text>active</Text>}"><a href="/valoraduanals/create"><i class="fa fa-tag"></i><span data-i18n="" class="menu-title">Adicionar valor aduanal</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li>
+                                    <a asp-area="" asp-controller="Wholesalers" asp-action="#"><i class="ft ft-user"></i> Mayoristas</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Mayoristas" || ViewData["SubSection"] == "Editar Mayorista") { <Text>active</Text>}"><a href="/wholesalers/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar Mayoristas</span></a></li>
+                                        <li class=" nav-item @if(ViewData["SubSection"] == "Nuevo Mayorista") { <Text>active</Text>}"><a href="/wholesalers/create"><i class="ft ft-user-plus"></i><span data-i18n="" class="menu-title">Adicionar Mayorista</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Minorista" asp-action="Visit"><i class="ft ft-user"></i> Minoristas</a>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="costoxmoduloes" asp-action="#"><i class="ft ft-user"></i> Costos</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item"><a href="/costoxmoduloes/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Ver Costos</span></a></li>
+                                    </ul>
+                                </li>
+                                @* <li>
+                                <a asp-area="" asp-controller="wholesalers" asp-action="#"><i class="fa fa-wpforms"></i> Formularios</a>
+                                <ul class="menu-content">
+                                    <li class=" nav-item @if(ViewData["Section"] == "Trámites") { <Text>active</Text>}"><a href="/formbuilder/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Trámites</span></a></li>
+                                    <!-- <li class=" nav-item @if(ViewData["Section"] == "Formularios") { <Text>active</Text>}"><a href="/formbuilder/create"><i class="fa fa-plus"></i><span data-i18n="" class="menu-title">Crear Formulario</span></a></li>-->
+                                </ul>
+                            </li>*@
+                            </ul>
+                        </li>
+                    }
+                    else if (ViewData["Role"].Equals("Agencia") || ViewData["Role"].Equals("Empleado"))
+                    {
+                        <li class=" nav-item @if (ViewBag.URLSection == "/zellepayment") { <Text>active</Text>}"><a href="/zellepayment"><i class="fa fa-usd"></i><span data-i18n="" class="menu-title">Pagos Zelle</span></a></li>
+
+                        <li id="menuAdministracion">
+                            <a><i class="fa fa-dashboard"></i>Administración</a>
+                            <ul class="menu-content">
+                                <li class="nav-item ">
+                                    <a asp-controller="cuentabancarias" asp-action="index"><i class="fa fa-credit-card-alt"></i>Cuentas Bancarias</a>
+                                </li>
+                                @if(agencyId == Guid.Parse("4752B08A-7684-42B3-930D-FF86F496DF2F") || agencyId == Guid.Parse("4E50B1EF-0EC1-4383-BCEE-3098744CDDD0")){
+                                     <li class="nav-item ">
+                                    <a href="/minorista/minoristas"><i class="fa fa-list"></i>Minoristas DC</a>
+                                </li>
+                                }
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="users" asp-action="#"><i class="fa fa-usd"></i>Contabilidad</a>
+                                    <ul class="menu-content">
+                                        <li class="nav-item ">
+                                            <a asp-area="" asp-controller="users" asp-action="#"><i class="fa fa-group"></i>Reconciliación</a>
+                                            <ul class="menu-content">
+                                                <li class=" nav-item"><a href="/contabilidad/cashindex"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Cash Index</span></a></li>
+                                                <li class=" nav-item"><a href="/contabilidad/reccash"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Cash</span></a></li>
+                                                <li class=" nav-item"><a href="/contabilidad/recbancaria"><i class="fa fa-user-plus"></i><span data-i18n="" class="menu-title">Bancaria</span></a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a href="#"><i class="fa fa-dropbox"></i>Bodegas</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item">
+                                            <a href="#"><i class="ft-cog"></i><span data-i18n="" class="menu-title">Administración</span></a>
+                                            <ul class="menu-content">
+                                                <li class="@if (ViewData["URLSection"] == "/bodega/index") { <text>active</text>} "><a href="/bodega/index" class="menu-item">Bodegas</a></li>
+                                                <li class="@if (ViewData["URLSection"] == "/categoriabodega/index") { <text>active</text>} "><a href="/categoriabodega/index" class="menu-item">Categorías</a></li>
+                                                <li class="@if (ViewData["URLSection"] == "/unidadmedida/index") { <text>active</text>} "><a href="/unidadmedida/index" class="menu-item">Unidades de Medida</a></li>
+                                                <li class="@if (ViewData["URLSection"] == "/tipodocumento/index") { <text>active</text>} "><a href="/tipodocumento/index" class="menu-item">Tipos de Documento</a></li>
+                                                <li class="@if (ViewData["URLSection"] == "/tipomovimiento/index") { <text>active</text>} "><a href="/tipomovimiento/index" class="menu-item">Tipos de Movimiento</a></li>
+                                                <li class="@if (ViewData["URLSection"] == "/estadomovimiento/index") { <text>active</text>} "><a href="/estadomovimiento/index" class="menu-item">Estados Movimiento</a></li>
+                                                <li name="catalogItem" class="@if (ViewData["URLSection"] == "/landingitems/index") { <text>active</text>} "><a href="/landingitems/index" class="menu-item">Landing Items</a></li>
+                                                <li name="landingItem" class="@if (ViewData["URLSection"] == "/catalogitems/index") { <text>active</text>} "><a href="/catalogitems/index" class="menu-item">Catalog Items</a></li>
+
+                                            </ul>
+                                        </li>
+                                        <li style="background-color: #2700ff38;" class="@if (ViewData["URLSection"] == "/productobodega/index") { <text>active</text>} "><a href="/productobodega/index" class="menu-item">Productos</a></li>
+
+                                        <li class=" nav-item @if (ViewData["URLSection"] == "/movimientoproducto/index") { <text>active</text>} ">
+                                            <a href="/movimientoproducto/index" class="menu-item">
+                                                Movimientos
+                                                <i class="ft-circle"></i>
+                                                <span data-i18n="" class="menu-title"></span>
+                                            </a>
+                                        </li>
+
+                                        <li class=" nav-item @if (ViewData["URLSection"] == "/report/index") { <text>active</text>}">
+                                            <a href="/report/index" class="menu-item">
+                                                Reportes
+                                                <i class="ft-check-square"></i>
+                                                <span data-i18n="" class="menu-title"></span>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="users" asp-action="#"><i class="fa fa-group"></i>Empleados</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if (ViewData["Module"] == "ListarUsuarios")
+                                                             {
+                                                                 <Text>active</Text>}"><a href="/users/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar empleados</span></a></li>
+                                        <li class=" nav-item @if (ViewData["Module"] == "CrearUsuarios")
+                                                             {
+                                                                 <Text>active</Text>}"><a href="/users/create"><i class="fa fa-user-plus"></i><span data-i18n="" class="menu-title">Adicionar empleados</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="contacts" asp-action="#"><i class="fa fa-user-o"></i>contactos</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if (ViewData["Module"] == "ListarContactos")
+                                                         {
+                                                             <Text>active</Text>}"><a href="/contacts/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar contactos</span></a></li>
+                                        <li class=" nav-item @if (ViewData["Module"] == "CrearContactos")
+                                                         {
+                                                             <Text>active</Text>}"><a href="/contacts/create"><i class="ft-user-plus"></i><span data-i18n="" class="menu-title">Adicionar contacto</span></a></li>
+                                        <li class=" nav-item @if (ViewData["Module"] == "ImportarContactos")
+                                                         {
+                                                             <Text>active</Text>}"><a href="/contacts/importcontact"><i class="ft-upload"></i><span data-i18n="" class="menu-title">Importar contactos</span></a></li>
+                                    </ul>
+                                </li>
+
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Carriers" asp-action="#"><i class="fa fa-user-secret"></i>Carriers</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if (ViewData["Module"] == "ListarCarrier")
+                                                         {
+                                                             <Text>active</Text>}"><a href="/carriers/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar carriers</span></a></li>
+                                        <li class=" nav-item @if (ViewData["Module"] == "CrearCarrier")
+                                                         {
+                                                             <Text>active</Text>}"><a href="/carriers/create"><i class="fa fa-street-view"></i><span data-i18n="" class="menu-title">Adicionar carrier</span></a></li>
+                                    </ul>
+                                </li>
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Offices" asp-action="#"><i class="fa fa-building-o"></i>Oficinas</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if (ViewData["Module"] == "ListarOficinas")
+                                                         {
+                                                             <Text>active</Text>}"><a href="/offices/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar oficinas</span></a></li>
+                                        <li class=" nav-item @if (ViewData["Module"] == "AdicionarOficinas")
+                                                         {
+                                                             <Text>active</Text>}"><a href="/offices/create"><i class="fa fa-building-o"></i><span data-i18n="" class="menu-title">Adicionar oficinas</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Wholesalers" asp-action="#"><i class="ft ft-user"></i> Mayoristas</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Mayoristas" || ViewData["SubSection"] == "Editar Mayorista") { <Text>active</Text>}"><a href="/wholesalers/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar Mayoristas</span></a></li>
+                                        <li class=" nav-item @if(ViewData["SubSection"] == "Nuevo Mayorista") { <Text>active</Text>}"><a href="/wholesalers/create"><i class="ft ft-user-plus"></i><span data-i18n="" class="menu-title">Adicionar Mayorista</span></a></li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <a asp-area="" asp-controller="Minorista" asp-action="Visit"><i class="ft ft-user"></i> Minoristas</a>
+                                </li>
+                                <li class="nav-item ">
+                                    <a asp-area="" asp-controller="Minorista" asp-action="#"><i class="fa fa-usd"></i>Gestionar Precios</a>
+                                    <ul class="menu-content">
+                                        <li class=" nav-item @if (ViewData["URLSection"] == "/Minorista/Index") { <text>active</text>} "><a href="/minorista/index"><i class="fa fa-home"></i><span data-i18n="" class="menu-title">Minoristas</span></a></li>
+                                        <li class=" nav-item @if (ViewData["URLSection"] == "/Minorista/preciostramites") { <text>active</text>} "><a href="/minorista/preciostramites"><i class="fa fa-user"></i><span data-i18n="" class="menu-title">Clientes </span></a></li>
+                                    </ul>
+
+                                </li>
+                                <li class="nav-item @if (ViewBag.URLSection == "/Logs/Index"){<text>active</text> }">
+                                    <a asp-controller="Logs" asp-action="Index"><i class="fa fa-list"></i>Logs</a>
+                                </li>
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Rentadoras") { <Text>active</Text>}"><a href="/ticket/Rentadoras"><i class="fa fa-car"></i><span data-i18n="" class="menu-title">Rentadoras</span></a></li>
+                                @*
+                                <li>
+                                <a asp-area="" asp-controller="Wholesalers" asp-action="#"><i class="fa fa-wpforms"></i> Formularios</a>
+                                <ul class="menu-content">
+                                    <li class=" nav-item @if(ViewData["Section"] == "Trámites") { <Text>active</Text>}"><a href="/formbuilder/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Trámites</span></a></li>
+                                    <!--<li class=" nav-item @if(ViewData["Section"] == "Formularios") { <Text>active</Text>}"><a href="/formbuilder/create"><i class="ft ft-user-plus"></i><span data-i18n="" class="menu-title">Crear Formulario</span></a></li>-->
+                                </ul>
+                            </li>
+                                *@
+                            </ul>
+                        </li>
+                        <li class="nav-item " @if (agencyId == Guid.Parse("4CD32E7D-45DE-46E7-9944-9F44B03E5BE4")) { <text> style="background-color: #2700ff38;" </text> }>
+                            <a asp-area="" asp-controller="Offices" asp-action="#">
+                                <i class="fa fa-list-ol"></i>@if (agencyId == Guid.Parse("4CD32E7D-45DE-46E7-9944-9F44B03E5BE4"))
+                                {<text> Servicios</text>}
+                            else
+                            { <text>Otros Servicios</text>}
+                            </a>
+                            <ul class="menu-content">
+                                <li class=" nav-item  @if(ViewData["URLSection"] == "/Servicios") { <Text>active</Text>} "><a href="/servicios/"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar Servicios</span></a></li>
+                                <li class=" nav-item @if(ViewData["URLSection"] == "/Servicios/Create") { <Text>active</Text>}"><a href="/servicios/create"><i class="fa fa-building-o"></i><span data-i18n="" class="menu-title">Nuevo Servicio</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item " data-menu="Recarga">
+                            <a asp-area="" asp-controller="Offices" asp-action="#"><i class="fa fa-phone"></i>Recargas</a>
+                            <ul class="menu-content">
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Recargas" || ViewData["SubSection"] == "Detalles de recarga") { <Text>active</Text>}"><a href="/rechargue/"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar recarga</span></a></li>
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Crear Recarga") { <Text>active</Text>}"><a href="/rechargue/create"><i class="fa fa-building-o"></i><span data-i18n="" class="menu-title">Nueva recarga</span></a></li>
+                            </ul>
+                        </li>
+                        <li class="nav-item " @if (agencyId == Guid.Parse("4CD32E7D-45DE-46E7-9944-9F44B03E5BE4")) { <text> style="background-color: #2700ff38;" </text> }>
+                            <a asp-area="" asp-action="#"><i class="fa fa-book"></i>Pasaporte</a>
+                            <ul class="menu-content">
+                                @if (agencyId == agencyDCubaId)
+                                {
+                                    <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Pasaportes" || ViewData["SubSection"] == "Listado de Pasaporte") { <Text>active</Text>}"><a href="/passport/"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar Clientes</span></a></li>
+                                    <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Pasaportes" || ViewData["SubSection"] == "Listado de Pasaporte Minoristas") { <Text>active</Text>}"><a href="/passport/IndexImportados"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar Minoristas</span></a></li>
+                                }
+                                else
+                                {
+                                    <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Pasaportes" || ViewData["SubSection"] == "Listado de Pasaporte") { <Text>active</Text>}"><a href="/passport/"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar Pasaportes</span></a></li>
+                                }
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Crear Pasaporte") { <Text>active</Text>}"><a href="/passport/create"><i class="fa fa-book"></i><span data-i18n="" class="menu-title">Nuevo Pasaporte</span></a></li>
+                                <li style="background-color: #2700ff38;" class=" nav-item @if(ViewData["URLSection"] == "/Passport/Import") { <Text>active</Text>}"><a href="/passport/import"><i class="fa fa-plus"></i><span data-i18n="" class="menu-title">Ingresar codigo</span></a></li>
+                            </ul>
+                        </li>
+                        @if (agencyId == agencyDCubaId)
+                        {
+                            <li class="nav-item ">
+                                <a asp-area="" asp-action="#"><i class="fa fa-book"></i>Guia Pasaporte</a>
+                                <ul class="menu-content">
+                                    <li class=" nav-item @if(ViewData["URLSection"] == "/passport/indexguia") { <Text>active</Text>}"><a href="/passport/indexguia"><i class="fa fa-book"></i><span data-i18n="" class="menu-title">Listado de Guias</span></a></li>
+                                    <li class=" nav-item "><a href="https://bit.ly/39nkXQ5" target="_blank"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Portal Consular</span></a></li>
+
+                                </ul>
+                            </li>
+                        }
+
+                        <li class=" nav-item" data-menu="Remesas">
+                            <a href="#"><i class="fa fa-cc-paypal"></i><span data-i18n="" class="menu-title">Remesas</span></a>
+                            <ul class="menu-content">
+                                <li class=" nav-item @if (ViewData["SubSection"] == "Listado de Remesas" || ViewData["SubSection"] == "Detalles de Remesa" || ViewData["URLSection"] == "/Remesas") { <Text>active</Text>}"><a href="/remesas/index"><i class="fa fa-money"></i><span data-i18n="" class="menu-title">Ver remesas</span></a></li>
+                                @if (!ViewData["Role"].Equals("Administrador"))
+                                {
+                                    <li class=" nav-item @if(ViewData["SubSection"] == "Crear nuevo envio de Remesa") { <Text>active</Text>} "><a href="/remesas/createremesa"><i class="fa fa-credit-card"></i><span data-i18n="" class="menu-title">Nueva remesa</span></a></li>
+                                }
+                            </ul>
+                        </li>
+                        <li class="nav-item " data-menu="Reservas">
+                            <a asp-area="" asp-controller="Offices" asp-action="#"><i class="fa fa-list-alt"></i>Reservas</a>
+                            <ul class="menu-content">
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Reservas" || ViewData["SubSection"] == "Detalles de reserva" || ViewData["SubSection"] == "Editar Reserva" || ViewData["SubSection"] == "Gestionar Pago Reserva" || ViewData["SubSection"] == "Registro de Pagos Reserva") { <Text>active</Text>}"><a href="/ticket/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar reservas</span></a></li>
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Comprar Reserva") { <Text>active</Text>}"><a href="/ticket/create"><i class="fa fa-building-o"></i><span data-i18n="" class="menu-title">Nueva reserva</span></a></li>
+                                <li style="background-color: #2700ff38;" class=" nav-item @if(ViewData["URLSection"] == "/Ticket/Import") { <Text>active</Text>}"><a href="/ticket/import"><i class="fa fa-plus"></i><span data-i18n="" class="menu-title">Ingresar codigo</span></a></li>
+                                @*<li class=" nav-item @if(ViewData["SubSection"] == "Reserva Auto") { <Text>active</Text>}"><a href="/ticket/CreateAuto"><i class="fa fa-car"></i><span data-i18n="" class="menu-title">Nueva Reserva Auto</span></a></li>*@
+
+                                @*<li class=" nav-item @if(ViewData["Module"] == "ImportarTicket") { <Text>active</Text>}"><a href="/ticket/importticket"><i class="ft-upload"></i><span data-i18n="" class="menu-title">Importar Reservas</span></a></li>*@
+                            </ul>
+                        </li>
+
+                    }
+
+                    <li class=" nav-item" data-menu="Maritimo">
+                        <a href="#"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Envíos Marítimos</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if (ViewData["SubSection"] == "Listar envío marítimo" || ViewData["SubSection"] == "Detalles de envío marítimo") { <Text>active</Text>}"><a href="/enviomaritimo/"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Listar envíos</span></a></li>
+                            <li id="EnvioCaribe" style="display:none" class=" nav-item @if (ViewData["URLSection"] == "/EnviosCaribe/Index") { <Text>active</Text>}"><a href="/envioscaribe/"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Envíos Caribe</span></a></li>
+                            @if (!ViewData["Role"].Equals("Administrador"))
+                            {
+                                <li class=" nav-item @if (ViewData["SubSection"] == "Nuevo envío marítimo") { <Text>active</Text>}"><a href="/enviomaritimo/create"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Nuevo envío</span></a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class=" nav-item" data-menu="Envios">
+                        <a href="#"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Envíos</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if (ViewData["SubSection"] == "Envíos de paquetes" ||  ViewData["URLSection"] == "/AirShipping") { <Text>active</Text>}"><a href="/airshipping/"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Listar Paquetes</span></a></li>
+                            <li class=" nav-item @if (ViewData["URLSection"] == "/OrderNew/Combos") { <Text>active</Text>}"><a class="block" href="/ordernew/combos"><i class="fa fa-gift"></i><span data-i18n="" class="menu-title">Listar Combos</span></a></li>
+                            <li name="menutiendas" class=" nav-item @if (ViewData["URLSection"] == "/OrderNew/Tienda") { <Text>active</Text>}"><a class="block" href="/ordernew/tiendas"><i class="fa fa-gift"></i><span data-i18n="" class="menu-title">Listar Tiendas</span></a></li>
+
+                            @if (!ViewData["Role"].Equals("Administrador"))
+                            {
+                                <li style="background-color: #2700ff38;" class=" nav-item @if(ViewData["SubSection"] == "Nuevo envío") { <Text>active</Text>} "><a href="/ordernew/create"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Nuevo Envío</span></a></li>
+                            }
+                            <!--<li class=" nav-item @if(ViewData["Module"] == "ImportarOrder") { <Text>active</Text>}"><a href="/orders/importorders"><i class="ft-upload"></i><span data-i18n="" class="menu-title">Importar envíos</span></a></li>-->
+                        </ul>
+                    </li>
+                    <li id="menu-cubiq" class=" nav-item" data-menu="Cubiq">
+                        <a href="#"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Envíos Cubiq</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if (ViewData["SubSection"] == "Envíos Cubiq" ||  ViewData["URLSection"] == "/OrderCubiq") { <Text>active</Text>}"><a href="/OrderCubiq/"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Listar Paquetes</span></a></li>
+                            <li class=" nav-item @if(ViewData["SubSection"] == "Nuevo Envío Cubiq") { <Text>active</Text>} "><a href="/OrderCubiq/Create"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Nuevo Envío</span></a></li>
+                            <li style="background-color: #2700ff38;" class=" nav-item @if(ViewData["SubSection"] == "Nuevo Envío AV") { <Text>active</Text>} "><a href="/OrderCubiq/CreateAV"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Nuevo Envío AV</span></a></li>
+                        </ul>
+                    </li>
+                    <li id="menu-guia" class=" nav-item" data-menu="CubiqGuia">
+                        <a href="#"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Guía Aérea</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if ((string)ViewData["URLSection"] == "/OrderCubiq/IndexGuia") { <Text>active</Text>}"><a href="/OrderCubiq/IndexGuia"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Guías Aéreas</span></a></li>
+                            <li class=" nav-item @if((string)ViewData["URLSection"] == "/OrderCubiq/GuiasNuevas") { <Text>active</Text>} "><a href="/OrderCubiq/GuiasNuevas"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Crear Guía Aérea</span></a></li>
+                            <li class=" nav-item @if((string)ViewData["URLSection"] == "/OrderCubiq/CreateGuia") { <Text>active</Text>} "><a href="/OrderCubiq/CreateGuia"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Abrir Nueva Guía</span></a></li>
+                        </ul>
+                    </li>
+                    <li class=" nav-item" data-menu="Mercado">
+                        <a href="#"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Mercado</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if (ViewData["SubSection"] == "Mercado" ||  ViewData["URLSection"] == "/Mercado") { <Text>active</Text>}"><a href="/mercado/"><i class="fa fa-shopping-bag"></i><span data-i18n="" class="menu-title">Listar Ordenes</span></a></li>
+                            <li style="background-color: #2700ff38;" class=" nav-item @if(ViewData["SubSection"] == "Nueva Orden Mercado") { <Text>active</Text>} "><a href="/mercado/create"><i class="fa fa-shopping-cart"></i><span data-i18n="" class="menu-title">Nueva Orden</span></a></li>
+                        </ul>
+                    </li>
+                    <li class=" nav-item" data-menu="Equipaje">
+                        <a href="#"><i class="fa fa-briefcase"></i><span data-i18n="" class="menu-title">Equipajes</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if(ViewData["SubSection"] == "Listado de Equipajes" || ViewData["SubSection"] == "Detalles de Equipaje") { <Text>active</Text>}"><a href="/shippings/index"><i class="fa fa-shopping-basket"></i><span data-i18n="" class="menu-title">Ver equipajes</span></a></li>
+                            @if (!ViewData["Role"].Equals("Administrador"))
+                            {
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Nuevo Equipaje") { <Text>active</Text>}"><a href="/shippings/create"><i class="fa fa-medkit"></i><span data-i18n="" class="menu-title">Crear Equipaje</span></a></li>
+                                <li class=" nav-item @if(ViewData["SubSection"] == "Escanear Qr") { <Text>active</Text>}"><a href="/shippings/scanqr"><i class="fa fa-qrcode"></i><span data-i18n="" class="menu-title">Escanear QR</span></a></li>
+                            }
+                        </ul>
+                    </li>
+                    <li class=" nav-item" data-menu="Reclamo">
+                        <a href="#"><i class="fa fa-file"></i><span data-i18n="" class="menu-title">Reclamos</span></a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if (ViewBag.URLSection == "/Reclamo") { <Text>active</Text>}"><a href="/Reclamo"><i class="fa fa-file"></i><span data-i18n="" class="menu-title">Listar Reclamos</span></a></li>
+                            <li class=" nav-item @if(ViewBag.SubSection == "Crear Reclamo") { <Text>active</Text>}"><a href="/Reclamo/Create"><i class="fa fa-file"></i><span data-i18n="" class="menu-title">Crear Reclamo</span></a></li>
+                        </ul>
+                    </li>
+                }
+                else if (ViewData["Role"].Equals("EmpleadoCuba") || ViewData["Role"].Equals("DistributorCuba"))
+                {
+                    <li data-menu="ECOrdenesEnviadas" class=" nav-item @if (ViewData["SubSection"] == "Órdenes Enviadas") { <Text>active</Text>}"><a href="/empleadocuba/ordenesenviadas"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Órdenes Enviadas</span></a></li>
+                    <li data-menu="ECOrdenesRevisadas" class=" nav-item @if (ViewData["SubSection"] == "Órdenes Revisadas" ) { <Text>active</Text>}"><a href="/empleadocuba/ordenesrevisadas"><i class="fa fa-edit"></i><span data-i18n="" class="menu-title">Órdenes Revisadas</span></a></li>
+                    <li data-menu="ECOrdenesEntregadas" class=" nav-item @if (ViewData["SubSection"] == "Órdenes Entregadas") { <Text>active</Text>}"><a href="/empleadocuba/ordenesentregadas"><i class="fa fa-check-square-o"></i><span data-i18n="" class="menu-title">Órdenes Entregadas</span></a></li>
+                    <li data-menu="ECOCombos" class=" nav-item @if (ViewData["SubSection"] == "Envíos de Combos") { <Text>active</Text>}"><a href="/ordernew/combos"><i class="fa fa-gift"></i><span data-i18n="" class="menu-title">Combos</span></a></li>
+                    <li class=" nav-item @if (ViewData["SubSection"] == "Listado de Remesas" || ViewData["SubSection"] == "Detalles de Remesa") { <Text>active</Text>}"><a href="/remesas/index"><i class="fa fa-money"></i><span data-i18n="" class="menu-title">Remesas</span></a></li>
+                    <li data-menu="ECEquipajes" class=" nav-item @if(ViewData["SubSection"] == "Listado de Equipajes" || ViewData["SubSection"] == "Detalles de Equipaje") { <Text>active</Text>}"><a href="/shippings/index"><i class="fa fa-shopping-basket"></i><span data-i18n="" class="menu-title">Ver equipajes</span></a></li>
+                }
+
+            </ul>
+        </div>
+    </div>
+    <!-- END: Main Menu-->
+    <!-- BEGIN: Content-->
+    <div class="app-content content">
+        @RenderBody()
+    </div>
+    <!-- END: Content-->
+
+    <div class="sidenav-overlay"></div>
+    <div class="drag-target"></div>
+
+    <!-- BEGIN: Footer-->
+    <footer>
+        <p>&copy; 2019 - Agenciapp</p>
+    </footer>
+    <!-- END: Footer-->
+    <!-- BEGIN: Vendor JS-->
+    <script src="~/AdminTemplate4/app-assets/vendors/js/vendors.min.js"></script>
+    <!-- BEGIN Vendor JS-->
+    <!-- BEGIN: Page Vendor JS-->
+    <script src="~/AdminTemplate4/app-assets/vendors/js/pickers/daterange/moment.min.js"></script>
+    <script src="~/AdminTemplate4/app-assets/vendors/js/pickers/daterange/daterangepicker.js"></script>
+    <script src="~/AdminTemplate4/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+    <script src="~/AdminTemplate4/app-assets/vendors/js/forms/quill/quill.js"></script>
+    <script src="~/AdminTemplate4/app-assets/vendors/js/extensions/dragula.min.js"></script>
+    <!-- END: Page Vendor JS-->
+    <script src="~/AdminTemplate4/app-assets/vendors/js/extensions/toastr.min.js" type="text/javascript"></script>
+
+    <!-- BEGIN: Theme JS-->
+    <script src="~/AdminTemplate4/app-assets/js/core/app-menu.js"></script>
+    <script src="~/AdminTemplate4/app-assets/js/core/app.js"></script>
+    <!-- END: Theme JS-->
+
+    <script src="~/js/Views/plantilla.js" asp-append-version="true" type="text/javascript"></script>
+    <script src="~/js/Views/NotificationLayout2.js" asp-append-version="true" type="text/javascript"></script>
+
+    <!--Cargar submenus otros tramites-->
+    <script>
+        $(document).ready(function () {
+            $.ajax({
+                async: true,
+                type: "POST",
+                dataType: "json",
+                contentType: "application/x-www-form-urlencoded",
+                url: "/formbuilder/GetForms",
+                beforeSend: function () {
+                    $('li[name = "otrostramites"]').remove();
+                },
+                success: function (response) {
+
+                    var elem = $('#otrosTramites');
+                    var forms = JSON.parse(response);
+                    for (var i = 0; i < forms.length; i++) {
+                        elem.append('<li name="otrostramites" class=" nav-item "><a href="/ResponseForms/Index/' + forms[i]["Id"] + '"><i class="fa fa-file-o"></i><span data-i18n="" class="menu-title">' + forms[i]["name"] + '</span></a></li>');
+                    }
+
+                },
+                error: function () {
+                    alert("Error al crear submenus")
+                },
+                timeout: 120000,
+            });
+
+        });
+    </script>
+
+
+    <script>
+        $(document).ready(function () {
+            $('#agency').html('<b>Agencia ' + getcookie("AgenciaName") + '</b>');
+            $('#office').html('<small><b>' + getcookie("OfficeName") + '</b></small>')
+
+            var AgencyId = getcookie("AgencyId");
+            var isCarga = getcookie("IsCarga");
+            if (getcookie("AgenciaName") == "Rapid Multiservice" || getcookie("AgenciaName") == "Rapid-Vacation Mode" || getcookie("AgenciaName") == "Kolet Travel Services") {
+                $('[name="menutiendas"]').hide();
+                $('#EnvioCaribe').show();
+            }
+            if (getcookie("AgenciaName") != "Rapid Multiservice") {
+                $('[name="landingItem"]').hide();
+                $('[name="catalogItem"]').hide();
+
+            }
+            if (isCarga != "True") {
+                $("#menu-guia").hide();
+            }
+
+
+        });
+
+    </script>
+
+    <script>
+        $('.block').on('click', function () {
+            var block_ele = $('.main-menu');
+            $(block_ele).block({
+                message: '<div class="ft-refresh-cw icon-spin font-medium-2"></div>',
+                timeout: 5000, //unblock after 2 seconds
+                overlayCSS: {
+                    backgroundColor: '#FFF',
+                    opacity: 0.8,
+                    cursor: 'wait'
+                },
+                css: {
+                    border: 0,
+                    padding: 0,
+                    backgroundColor: 'transparent'
+                }
+            });
+        });
+    </script>
+    <script>
+        if ($(location).attr('hostname') != "agenciapp.com") {
+            $("#cartel").removeAttr("hidden");
+        }
+    </script>
+
+    @RenderSection("Scripts", required: false)
+</body>
+<!-- END: Body-->
+
+</html>

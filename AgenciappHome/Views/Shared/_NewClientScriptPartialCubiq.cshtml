@@ -1,0 +1,267 @@
+﻿<!--Script para cargar las ciudades-->
+<link rel="stylesheet" type="text/css" href="~/app-assets/vendors/css/pickers/datetime/bootstrap-datetimepicker.css">
+<script type="text/javascript" src="~/app-assets/vendors/js/pickers/dateTime/moment-with-locales.min.js"></script>
+<script type="text/javascript" src="~/app-assets/vendors/js/pickers/dateTime/bootstrap-datetimepicker.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $(".date").datetimepicker({
+            format: 'MM/DD/YYYY',
+            viewMode: "years",
+            widgetPositioning: {
+                horizontal: 'auto',
+                vertical: 'bottom'
+            },
+            extraFormats: ["YYYY-MM-DD"]
+        }).on("dp.change", function (e) {
+            var mirrorId = $(this).data("input");
+            if (mirrorId) {
+                var mirror = $("#" + mirrorId);
+                mirror.val(new Date(e.date).toISOString().substr(0, 10)).trigger("change");
+            }
+        });
+
+        $(".date-input").mask("99/99/9999")
+
+        $("select[id=Clientstate]").empty()
+        $("select[id=Clientstate]").append(new Option())
+        $("select[id=Clientstate]").append(new Option("Alabama", "Alabama"))
+        $("select[id=Clientstate]").append(new Option("Alaska", "Alaska"))
+        $("select[id=Clientstate]").append(new Option("American Samoa", "American Samoa"))
+        $("select[id=Clientstate]").append(new Option("Arizona", "Arizona"))
+        $("select[id=Clientstate]").append(new Option("Arkansas", "Arkansas"))
+        $("select[id=Clientstate]").append(new Option("Armed Forces Americas", "Armed Forces Americas"))
+        $("select[id=Clientstate]").append(new Option("Armed Forces Europe, Canada, Africa and Middle East", "Armed Forces Europe, Canada, Africa and Middle East"))
+        $("select[id=Clientstate]").append(new Option("Armed Forces Pacific", "Armed Forces Pacific"))
+        $("select[id=Clientstate]").append(new Option("California", "California"))
+        $("select[id=Clientstate]").append(new Option("Colorado", "Colorado"))
+        $("select[id=Clientstate]").append(new Option("Connecticut", "Connecticut"))
+        $("select[id=Clientstate]").append(new Option("Delaware", "Delaware"))
+        $("select[id=Clientstate]").append(new Option("District of Columbia", "District of Columbia"))
+        $("select[id=Clientstate]").append(new Option("Florida", "Florida"))
+        $("select[id=Clientstate]").append(new Option("Georgia", "Georgia"))
+        $("select[id=Clientstate]").append(new Option("Guam", "Guam"))
+        $("select[id=Clientstate]").append(new Option("Hawaii", "Hawaii"))
+        $("select[id=Clientstate]").append(new Option("Idaho", "Idaho"))
+        $("select[id=Clientstate]").append(new Option("Illinois", "Illinois"))
+        $("select[id=Clientstate]").append(new Option("Indiana", "Indiana"))
+        $("select[id=Clientstate]").append(new Option("Iowa", "Iowa"))
+        $("select[id=Clientstate]").append(new Option("Kansas", "Kansas"))
+        $("select[id=Clientstate]").append(new Option("Kentucky", "Kentucky"))
+        $("select[id=Clientstate]").append(new Option("Luisiana", "Luisiana"))
+        $("select[id=Clientstate]").append(new Option("Maine", "Maine"))
+        $("select[id=Clientstate]").append(new Option("Marshall Islands", "Marshall Islands"))
+        $("select[id=Clientstate]").append(new Option("Maryland", "Maryland"))
+        $("select[id=Clientstate]").append(new Option("Massachusetts", "Massachusetts"))
+        $("select[id=Clientstate]").append(new Option("Michigan", "Michigan"))
+        $("select[id=Clientstate]").append(new Option("Micronesia", "Micronesia"))
+        $("select[id=Clientstate]").append(new Option("Minnesota", "Minnesota"))
+        $("select[id=Clientstate]").append(new Option("Mississippi", "Mississippi"))
+        $("select[id=Clientstate]").append(new Option("Missouri", "Missouri"))
+        $("select[id=Clientstate]").append(new Option("Montana", "Montana"))
+        $("select[id=Clientstate]").append(new Option("Nebraska", "Nebraska"))
+        $("select[id=Clientstate]").append(new Option("Nevada", "Nevada"))
+        $("select[id=Clientstate]").append(new Option("New Hampshire", "New Hampshire"))
+        $("select[id=Clientstate]").append(new Option("New Jersey", "New Jersey"))
+        $("select[id=Clientstate]").append(new Option("New Mexico", "New Mexico"))
+        $("select[id=Clientstate]").append(new Option("New York", "New York"))
+        $("select[id=Clientstate]").append(new Option("North Carolina", "North Carolina"))
+        $("select[id=Clientstate]").append(new Option("North Dakota", "North Dakota"))
+        $("select[id=Clientstate]").append(new Option("Northern Mariana Islands", "Northern Mariana Islands"))
+        $("select[id=Clientstate]").append(new Option("Ohio", "Ohio"))
+        $("select[id=Clientstate]").append(new Option("Oklahoma", "Oklahoma"))
+        $("select[id=Clientstate]").append(new Option("Oregon", "Oregon"))
+        $("select[id=Clientstate]").append(new Option("Palau", "Palau"))
+        $("select[id=Clientstate]").append(new Option("Pennsylvania", "Pennsylvania"))
+        $("select[id=Clientstate]").append(new Option("Puerto Rico", "Puerto Rico"))
+        $("select[id=Clientstate]").append(new Option("Rhode Island", "Rhode Island"))
+        $("select[id=Clientstate]").append(new Option("South Carolina", "South Carolina"))
+        $("select[id=Clientstate]").append(new Option("South Dakota", "South Dakota"))
+        $("select[id=Clientstate]").append(new Option("Tennessee", "Tennessee"))
+        $("select[id=Clientstate]").append(new Option("Texas", "Texas"))
+        $("select[id=Clientstate]").append(new Option("Utah", "Utah"))
+        $("select[id=Clientstate]").append(new Option("Vermont", "Vermont"))
+        $("select[id=Clientstate]").append(new Option("Virgin Islands", "Virgin Islands"))
+        $("select[id=Clientstate]").append(new Option("Virginia", "Virginia"))
+        $("select[id=Clientstate]").append(new Option("Washington", "Washington"))
+        $("select[id=Clientstate]").append(new Option("West Virginia", "West Virginia"))
+        $("select[id=Clientstate]").append(new Option("Wisconsin", "Wisconsin"))
+        $("select[id=Clientstate]").append(new Option("Wyoming", "Wyoming"))
+
+    });
+</script>
+
+<!--Script para guardar nuevo cliente-->
+<script src="~/app-assets/vendors/js/jquery.mask/jquery.mask.min.js"></script>
+<script type="text/javascript" src="~/app-assets/vendors/js/forms/select/select2.full.min.js"></script>
+
+<script>
+    var validateNuevoCliente = function () {
+        if ($("#Name").val() == "") {
+            showWarningMessage("Atención", "El campo Nombre no puede estar vacío.");
+            return false;
+        }
+        if ($("#Lastname").val() == "") {
+            showWarningMessage("Atención", "El campo Apellidos no puede estar vacío.");
+            return false;
+        }
+        if ($("#Phone").val() == "") {
+            showWarningMessage("Atención", "El campo Móvil no puede estar vacío.");
+            return false;
+        }
+        if ($("#ID").val() == "") {
+            showWarningMessage("Atención", "El campo ID no puede estar vacío.");
+            return false;
+        }
+
+
+        return true;
+    };
+    var cleanNuevoCliente = function () {
+        $('#Name').val("");
+        $('#Lastname').val("");
+        $('#Email').val("");
+        $('#Phone').val("");
+        $('#ID').val("");
+        $('#phoneCuba').val("");
+        $('#Clientstate').val("");
+        $('#Clientcity').val("");
+        $('#Address').val("");
+        $('#Zip').val("");
+        $("#acepto").attr("checked", "checked");
+    };
+    $(document).ready(function () {
+        //$("#Clientstate").select2();
+        //$("#Clientcity").select2();
+        $("#guardarNuevoCliente").on("click", function () {
+            if (validateNuevoCliente()) {
+                $('#nuevoClienteModal').modal('hide');
+                $(".modal-backdrop").remove();
+                $.ajax({
+                    async: true,
+                    type: "POST",
+                    contentType: "application/x-www-form-urlencoded",
+                    url: "/Clients/AddClientNew",
+                    data: {
+                        name: $("#Name").val(),
+                        lastname: $("#Lastname").val(),
+                        phone: $("#Phone").val(),
+                        email: $("#Email").val(),
+                        id: $("#ID").val(),
+                        //phoneCuba: $("#phoneCuba").val(),
+                        address: $("#Address").val(),
+                        state: $("#Clientstate").val(),
+                        city: $("#Clientcity").val(),
+                        zip: $("#Zip").val(),
+                        check: $('#acepto').is(':checked'),
+                        FechaNac: $("#fechaNac").val(),
+                        name2: $("#Name2").val(),
+                        lastname2: $("#Lastname2").val()
+                    },
+                    beforeSend: function () {
+                        $.blockUI();
+                    },
+                    success: function (response) {
+                        if (!response.success) {
+                            toastr.warning(response.msg);
+                        }
+                        else {
+                            if (document.location.pathname == "/clients/index") {
+                                document.location = "/clients/tramites/" + response.data.idClient;
+                            }
+                            else {
+                                document.location = document.location.pathname + "?msg=El usuario " + $("#Name").val() + " se ha creado satisfactoriamente.&idClient=" + response.data.idClient;
+                            }
+                        }
+                    },
+                    error: function () {
+                        toastr.error("No se ha podido crear el usuario, vuelva a intentar", "Error");
+                    },
+
+                });
+
+                $("#nuevoClienteModal").modal('hide')
+            }
+        });
+        $("#nuevoCliente").on("click", function () {
+            cleanNuevoCliente();
+             $('#nuevoClienteModal').modal('show');
+        });
+        $("#aceptoS").click(function () {
+            var a = $("#acepto");
+            a.attr("checked", function (i, value) { return !value; });
+        })
+        cleanNuevoCliente();
+        $("#Clientstate").on("change", function () {
+            lC($("#Clientstate"), $("#Clientcity"));
+        })
+    })
+
+    var lC = function (estado, ciudad) {
+        if (!estado)
+            return;
+
+        $.ajax({
+            url: "/Provincias/Ciudades?nombre=" + estado.val(),
+            type: "POST",
+            dataType: "json",
+            success: function (response) {
+                ciudad.empty();
+                ciudad.append(new Option())
+                for (var i in response) {
+                    var m = response[i];
+                    ciudad.append(new Option(m, m))
+                }
+            }
+        })
+    }
+
+</script>
+
+<!--Script para formato-->
+<script>
+    $('#Phone').mask('(000)-000-0000', {
+        placeholder: "(000)-000-0000"
+    });
+    $('#phoneCuba').mask('+00 00000000', {
+        placeholder: "Teléfono en Cuba"
+    });
+    $('#Zip').mask('00000', {
+        placeholder: "Zip Code"
+    });
+</script>
+
+
+
+
+<style>
+    .demo input[type="checkbox"] {
+        display: none;
+    }
+
+        .demo input[type="checkbox"] + label span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin: -1px 4px 0 0;
+            vertical-align: middle;
+            background: url("/images/checkbox/checkbox-uncheck.png");
+            background-size: cover;
+            cursor: pointer;
+        }
+
+        .demo input[type="checkbox"][checked= "checked"] + label span {
+            background: url("/images/checkbox/checkbox-check.png");
+            background-size: cover;
+        }
+
+    .demo {
+        margin-top: 10px;
+    }
+</style>
+<style>
+    .select2-selection__rendered {
+        left: 25px;
+        position: relative;
+    }
+</style>
+

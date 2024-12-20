@@ -12,4 +12,11 @@
   <ItemGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
     <SourceRoot Include="/Users/yuniervelazcobravo/.nuget/packages/" />
   </ItemGroup>
+  <ImportGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <Import Project="$(NuGetPackageRoot)microsoft.entityframeworkcore/9.0.0/buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props" Condition="Exists('$(NuGetPackageRoot)microsoft.entityframeworkcore/9.0.0/buildTransitive/net8.0/Microsoft.EntityFrameworkCore.props')" />
+  </ImportGroup>
+  <PropertyGroup Condition=" '$(ExcludeRestorePackageImports)' != 'true' ">
+    <PkgAWSSDK_Core Condition=" '$(PkgAWSSDK_Core)' == '' ">/Users/yuniervelazcobravo/.nuget/packages/awssdk.core/3.7.400.67</PkgAWSSDK_Core>
+    <PkgAWSSDK_Translate Condition=" '$(PkgAWSSDK_Translate)' == '' ">/Users/yuniervelazcobravo/.nuget/packages/awssdk.translate/3.7.400.67</PkgAWSSDK_Translate>
+  </PropertyGroup>
 </Project>

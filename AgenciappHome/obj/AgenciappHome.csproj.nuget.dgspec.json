@@ -4,14 +4,181 @@
     "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/AgenciappHome.csproj": {}
   },
   "projects": {
-    "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/AgenciappHome.csproj": {
+    "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.ApiClient/Agenciapp.ApiClient.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/AgenciappHome.csproj",
-        "projectName": "AgenciappHome",
-        "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/AgenciappHome.csproj",
+        "projectUniqueName": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.ApiClient/Agenciapp.ApiClient.csproj",
+        "projectName": "Agenciapp.ApiClient",
+        "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.ApiClient/Agenciapp.ApiClient.csproj",
         "packagesPath": "/Users/yuniervelazcobravo/.nuget/packages/",
-        "outputPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/obj/",
+        "outputPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.ApiClient/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/yuniervelazcobravo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/Agenciapp.Common.csproj": {
+                "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/Agenciapp.Common.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/Agenciapp.Common.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/Agenciapp.Common.csproj",
+        "projectName": "Agenciapp.Common",
+        "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/Agenciapp.Common.csproj",
+        "packagesPath": "/Users/yuniervelazcobravo/.nuget/packages/",
+        "outputPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/yuniervelazcobravo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/Agenciapp.Domain.csproj": {
+                "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/Agenciapp.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "CSharpFunctionalExtensions": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "Newtonsoft.Json": {
+              "target": "Package",
+              "version": "[13.0.3, )"
+            },
+            "QRCoder": {
+              "target": "Package",
+              "version": "[1.6.0, )"
+            },
+            "SendGrid": {
+              "target": "Package",
+              "version": "[9.24.1, )"
+            },
+            "Serilog": {
+              "target": "Package",
+              "version": "[4.2.0, )"
+            },
+            "SixLabors.ImageSharp": {
+              "target": "Package",
+              "version": "[3.1.6, )"
+            },
+            "System.Drawing.Common": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "ThoughtWorks.QRCode": {
+              "target": "Package",
+              "version": "[1.1.0, )"
+            },
+            "Twilio": {
+              "target": "Package",
+              "version": "[7.8.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/Agenciapp.Domain.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/Agenciapp.Domain.csproj",
+        "projectName": "Agenciapp.Domain",
+        "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/Agenciapp.Domain.csproj",
+        "packagesPath": "/Users/yuniervelazcobravo/.nuget/packages/",
+        "outputPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/Users/yuniervelazcobravo/.nuget/NuGet/NuGet.Config"
@@ -43,6 +210,230 @@
       "frameworks": {
         "net9.0": {
           "targetAlias": "net9.0",
+          "dependencies": {
+            "CSharpFunctionalExtensions": {
+              "target": "Package",
+              "version": "[3.2.0, )"
+            },
+            "FluentValidation": {
+              "target": "Package",
+              "version": "[11.11.0, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Relational": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[9.0.0, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[9.0.0, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Service/Agenciapp.Service.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Service/Agenciapp.Service.csproj",
+        "projectName": "Agenciapp.Service",
+        "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Service/Agenciapp.Service.csproj",
+        "packagesPath": "/Users/yuniervelazcobravo/.nuget/packages/",
+        "outputPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Service/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/yuniervelazcobravo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.ApiClient/Agenciapp.ApiClient.csproj": {
+                "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.ApiClient/Agenciapp.ApiClient.csproj"
+              },
+              "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/Agenciapp.Common.csproj": {
+                "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/Agenciapp.Common.csproj"
+              },
+              "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/Agenciapp.Domain.csproj": {
+                "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/Agenciapp.Domain.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "AWSSDK.Translate": {
+              "target": "Package",
+              "version": "[3.7.400.67, )"
+            },
+            "AuthorizeNet": {
+              "target": "Package",
+              "version": "[2.0.0, )"
+            },
+            "AutoMapper": {
+              "target": "Package",
+              "version": "[13.0.1, )"
+            },
+            "EPPlus": {
+              "target": "Package",
+              "version": "[5.8.3, )"
+            },
+            "FirebaseAdmin": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "GraphQL.Client": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "GraphQL.Client.Abstractions": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "GraphQL.Client.Serializer.Newtonsoft": {
+              "target": "Package",
+              "version": "[6.1.0, )"
+            },
+            "HtmlAgilityPack": {
+              "target": "Package",
+              "version": "[1.11.71, )"
+            },
+            "NPOI": {
+              "target": "Package",
+              "version": "[2.5.5, )"
+            },
+            "Sieve": {
+              "target": "Package",
+              "version": "[2.5.5, )"
+            },
+            "Stripe.net": {
+              "target": "Package",
+              "version": "[47.2.0, )"
+            },
+            "iTextSharp": {
+              "target": "Package",
+              "version": "[5.5.13.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/9.0.101/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/AgenciappHome.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/AgenciappHome.csproj",
+        "projectName": "AgenciappHome",
+        "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/AgenciappHome.csproj",
+        "packagesPath": "/Users/yuniervelazcobravo/.nuget/packages/",
+        "outputPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/AgenciappHome/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/yuniervelazcobravo/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net9.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net9.0": {
+            "targetAlias": "net9.0",
+            "projectReferences": {
+              "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Service/Agenciapp.Service.csproj": {
+                "projectPath": "/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Service/Agenciapp.Service.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        },
+        "restoreAuditProperties": {
+          "enableAudit": "true",
+          "auditLevel": "low",
+          "auditMode": "direct"
+        },
+        "SdkAnalysisLevel": "9.0.100"
+      },
+      "frameworks": {
+        "net9.0": {
+          "targetAlias": "net9.0",
+          "dependencies": {
+            "RestSharp": {
+              "target": "Package",
+              "version": "[112.1.0, )"
+            },
+            "WebMarkupMin.AspNetCore3": {
+              "target": "Package",
+              "version": "[2.18.1, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

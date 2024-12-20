@@ -16,7 +16,7 @@ namespace Agenciapp.Service.IReportServices.Reports
 {
     public static partial class Reporte
     {
-        public static async Task<string> GetReporteVentasEmpleadoRapid(string rangeDate, User aUser, databaseContext _context, IHostingEnvironment _env)
+        public static async Task<string> GetReporteVentasEmpleadoRapid(string rangeDate, User aUser, databaseContext _context, IWebHostEnvironment _env)
         {
             Serilog.Log.Information("Inicio de Reporte");
             using (MemoryStream MStream = new MemoryStream())

@@ -1,0 +1,132 @@
+﻿@using Agenciapp.Common.Contrains
+@{
+    Guid agencyId = Guid.Parse(ViewData["agencyId"].ToString());
+}
+
+<ul id="menu" style="display:none" data-menu="menu-navigation" class="navigation navigation-main">
+    <li class="nav-item">
+        <a href="#"><i class="ft-home"></i><span data-i18n="" class="menu-title">Inicio</span></a>
+        <ul class="menu-content">
+            <li class=" nav-item @if(ViewData["Module"] == "HomeEmpleado") {<Text>active</Text> }">
+                <a href="/home/indexempleado"><i class="ft-home"></i><span data-i18n="" class="menu-title">Index</span></a>
+            </li>
+        </ul>
+    </li>
+
+    @if (agencyId == AgencyName.HmPaquetes || (agencyId == AgencyName.RapidAlmacenCuba && (User.Identity.Name == "7863370501")))
+    {
+        <li id="menuAdministracion">
+            <a><i class="fa fa-dashboard"></i>Administración</a>
+            <ul class="menu-content">
+                @if (agencyId == AgencyName.RapidAlmacenCuba)
+                {
+                    <li class="nav-item ">
+                        <a asp-area="" asp-controller="users" asp-action="#"><i class="fa fa-group"></i>Empleados</a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if (ViewData["Module"] == "ListarUsuarios"){<Text>active</Text>}">
+                                <a href="/users/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar empleados</span></a>
+                            </li>
+                            <li class=" nav-item @if (ViewData["Module"] == "CrearUsuarios"){<Text>active</Text>}">
+                                <a href="/users/create"><i class="fa fa-user-plus"></i><span data-i18n="" class="menu-title">Adicionar empleados</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+                else
+                {
+                    <li class=" nav-item ">
+                    <a href="/setting/pricebyprovincepackage"><i class="fa fa-folder"></i><span data-i18n="" class="menu-title">Precios</span></a>
+                    </li>
+                    <li class=" nav-item ">
+                        <a href="/audit/index"><i class="fa fa-folder"></i><span data-i18n="" class="menu-title">Auditoria</span></a>
+                    </li>
+                    <li class=" nav-item ">
+                        <a href="/minorista/minoristas"><i class="fa fa-folder"></i><span data-i18n="" class="menu-title">Afiliados</span></a>
+                    </li>
+                    <li class="nav-item ">
+                        <a asp-area="" asp-controller="users" asp-action="#"><i class="fa fa-group"></i>Empleados</a>
+                        <ul class="menu-content">
+                            <li class=" nav-item @if (ViewData["Module"] == "ListarUsuarios"){<Text>active</Text>}">
+                                <a href="/users/index"><i class="fa fa-list"></i><span data-i18n="" class="menu-title">Listar empleados</span></a>
+                            </li>
+                            <li class=" nav-item @if (ViewData["Module"] == "CrearUsuarios"){<Text>active</Text>}">
+                                <a href="/users/create"><i class="fa fa-user-plus"></i><span data-i18n="" class="menu-title">Adicionar empleados</span></a>
+                            </li>
+                        </ul>
+                    </li>
+                }
+            </ul>
+        </li>        
+    }
+
+    @if(agencyId == AgencyName.FlyAwayAlmacenCuba)
+    {
+        <li data-menu="EMTransitoCubaUsa" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubacargaam/transitocubausa") { <Text>active</Text> }">
+            <a href="/empleadocubacargaam/transitocubausa"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Transito Cuba-USA</span></a>
+        </li>
+        <li data-menu="EMNacionalizando" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubacargaam/nacionalizando") { <Text>active</Text> }">
+            <a href="/empleadocubacargaam/nacionalizando"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Nacionalizando</span></a>
+        </li>
+        <li data-menu="EMTransitoCuba" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubacargaam/transitocuba") { <Text>active</Text> }">
+            <a href="/empleadocubacargaam/transitocuba"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Transito Cuba</span></a>
+        </li>
+        <li data-menu="EMRecibidoAlmacen" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubacargaam/recibidoalmacen") { <Text>active</Text> }">
+            <a href="/empleadocubacargaam/recibidoalmacen"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Recibido Almacen</span></a>
+        </li>
+        <li data-menu="EMDistribuidas" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubacargaam/distribuidas") { <Text>active</Text> }">
+            <a href="/empleadocubacargaam/distribuidas"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Órdenes Distribuidas</span></a>
+        </li>
+        <li data-menu="EMEntregadas" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubacargaam/entregadas") { <Text>active</Text> }">
+            <a href="/empleadocubacargaam/entregadas"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Órdenes Entregadas</span></a>
+        </li>
+    }
+    else if(agencyId == AgencyName.RapidAlmacenCuba)
+    {
+        <li data-menu="EMTransitoCubaUsa" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubamaritimo/transitocubausa") { <Text>active</Text> }">
+            <a href="/empleadocubamaritimo/transitocubausa"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Transito Cuba-USA</span></a>
+        </li>
+        <li data-menu="EMNacionalizando" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubamaritimo/nacionalizando") { <Text>active</Text> }">
+            <a href="/empleadocubamaritimo/nacionalizando"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Nacionalizando</span></a>
+        </li>
+        <li data-menu="EMTransitoCuba" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubamaritimo/transitocuba") { <Text>active</Text> }">
+            <a href="/empleadocubamaritimo/transitocuba"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Transito Cuba</span></a>
+        </li>
+        <li data-menu="EMRecibidoAlmacen" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubamaritimo/recibidoalmacen") { <Text>active</Text> }">
+            <a href="/empleadocubamaritimo/recibidoalmacen"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Recibido Almacen</span></a>
+        </li>
+        <li data-menu="EMDistribuidas" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubamaritimo/distribuidas") { <Text>active</Text> }">
+            <a href="/empleadocubamaritimo/distribuidas"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Órdenes Distribuidas</span></a>
+        </li>
+        <li data-menu="EMEntregadas" class=" nav-item @if (ViewData["URLSection"] == "/empleadocubamaritimo/entregadas") { <Text>active</Text> }">
+            <a href="/empleadocubamaritimo/entregadas"><i class="fa fa-ship"></i><span data-i18n="" class="menu-title">Órdenes Entregadas</span></a>
+        </li>
+    }
+    else
+    {
+        <li data-menu="CrearOrdenManual" class=" nav-item @if (ViewData["SubSection"] == "Nuevo envío manual") { <Text>active</Text> }">
+            <a href="/airshipping/createmanualorder"><i class="fa fa-plane"></i><span data-i18n="" class="menu-title">Nuevo Envío Manual</span></a>
+        </li>
+        <li data-menu="ECOrdenesDespachadas" class=" nav-item @if (ViewData["SubSection"] == "Órdenes Despachadas") { <Text>active</Text>}">
+            <a href="/empleadocuba/ordenesdespachadas"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Órdenes Despachadas</span></a>
+        </li>
+        <li data-menu="ECOrdenesRecibidas" class=" nav-item @if (ViewData["SubSection"] == "Órdenes Recibidas") {<Text>active</Text>}">
+            <a href="/empleadocuba/ordenesrecibidas"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Órdenes Recibidas</span></a>
+        </li>
+        <li data-menu="ECOrdenesIncompletas" class=" nav-item @if (ViewData["SubSection"] == "Órdenes Incompletas") {<Text>active</Text>}">
+            <a href="/empleadocuba/ordenesincompletas"><i class="fa fa-truck"></i><span data-i18n="" class="menu-title">Órdenes Incompletas</span></a>
+        </li>
+        <li data-menu="ECOrdenesEntregadas" class=" nav-item @if (ViewData["SubSection"] == "Órdenes Entregadas") {<Text>active</Text>}">
+            <a href="/empleadocuba/ordenesentregadas"><i class="fa fa-check-square-o"></i><span data-i18n="" class="menu-title">Órdenes Entregadas</span></a>
+        </li>
+        @if(agencyId == AgencyName.HmPaquetes)
+        {
+            <li data-menu="ECOrdenesImportadas" class=" nav-item @if (ViewData["SubSection"] == "Ordenes Importadas") {
+        <Text>active</Text>}"><a href="/ordercontainer/index"><i class="fa fa-file-excel-o"></i><span data-i18n="" class="menu-title">Órdenes Importadas</span></a></li>
+        }
+
+        <li data-menu="ECEquipajes" class=" nav-item @if(ViewData["SubSection"] == "Listado de Equipajes" || ViewData["SubSection"] == "Detalles de Equipaje") {<Text>active</Text>}">
+            <a href="/shippings/index"><i class="fa fa-shopping-basket"></i><span data-i18n="" class="menu-title">Ver equipajes</span></a>
+        </li>
+    }
+
+</ul>

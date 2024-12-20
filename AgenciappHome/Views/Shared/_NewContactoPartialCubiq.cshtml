@@ -1,0 +1,115 @@
+﻿@model STipo
+<button type="button" id="nuevoContacto" class="btn btn-primary btn-min-width mr-1 mb-1" style="margin-left:15px;" >
+    <i class="ft-user-plus"> Nuevo Destinatario</i>
+</button>
+<!-- Modal -->
+<div class="modal fade text-xs-left" id="nuevoContactoModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">Nuevo Destinatario</h4>
+            </div>
+            <div class="modal-body" style="margin-left: 20px; margin-right: 20px">
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group ">
+                            <label><b>Nombres <span style="color:red">*</span></b></label>
+                            <fieldset class="form-group position-relative ">
+                                <input class="form-control" id="nuevoContactName" placeholder="Nombre" name="inputContactName" />
+
+                                <span name="inputContactName" class="text-danger"></span>
+                            </fieldset>
+
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group   ">
+                            <label><b>Apellidos <span style="color:red">*</span></b></label>
+                            <fieldset class="form-group position-relative ">
+                                <input class="form-control" id="nuevoContactLastName" placeholder="Apellidos" name="inputContactLastName" />
+
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                            <label><b>Teléfono Primario <span style="color:red">*</span></b></label>
+                            <fieldset class="form-group position-relative ">
+                                <input class="form-control" id="nuevoContactPhoneMovil" placeholder="Telef. Movil" name="nuevoContactPhoneMovil" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                            <label><b>Teléfono Secundario <span style="color:red">*</span></b></label>
+                            <fieldset class="form-group position-relative ">
+                                <input class="form-control" id="nuevoContactPhoneHome" placeholder="Telef. Casa" name="nuevoContactPhoneHome" />
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group  ">
+                            <label><b>Carnet de Indentidad <span style="color:red">*</span></b></label>
+                            <fieldset class="form-group position-relative ">
+                                <input class="form-control" type="text" id="nuevoContactCI" placeholder="Carnet de Identidad" name="nuevoContactCI" />
+                            </fieldset>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group  ">
+                    <label><b>Direccción <span style="color:red">*</span></b></label>
+                    <textarea class="form-control" name="contactCalle" id="nuevoContactDir" placeholder="Dirección"></textarea>
+
+                </div>
+
+                <div class="form-group  ">
+                    <label><b>Provincia <span style="color:red">*</span></b></label>
+                    <fieldset class="form-group position-relative ">
+                        <select class="form-control hide-search-newContactProvince" style="width:100% " id="nuevoContactProvincia" name="nuevoContactProvincia">
+                            <option value=""></option>
+                            @if (ViewBag.provincias != null)
+                            {
+                                foreach (Provincia provincia in ViewBag.provincias)
+                                {
+                                    <option value="@provincia.nombreProvincia">@provincia.nombreProvincia</option>
+                                }
+
+                            }
+                        </select>
+
+                    </fieldset>
+
+
+                </div>
+                <div class="form-group  ">
+                    <label><b>Municipio <span style="color:red">*</span></b></label>
+                    <fieldset class="form-group position-relative ">
+                        <select class="form-control" name="nuevoContactMunicipio" id="nuevoContactMunicipio" placeholder="Municipio"></select>
+                    </fieldset>
+                </div>
+                <div class="form-group  ">
+                    <label><b>Reparto </b></label>
+                    <fieldset class="form-group position-relative ">
+                        <input class="form-control" name="nuevoContactReparto" id="nuevoContactReparto" placeholder="Reparto" />
+                    </fieldset>
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-min-width mr-1 mb-1" id="cancelarNuevoContacto" data-dismiss="modal">
+                    <i class="ft-x"></i> Cancelar
+                </button>
+                <button type="button" data-type="@Model" class="btn btn-success btn-min-width mr-1 mb-1" id="guardarNuevoContacto">
+                    <i class="fa fa-check-square-o"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>

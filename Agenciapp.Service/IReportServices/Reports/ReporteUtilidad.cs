@@ -18,7 +18,7 @@ namespace Agenciapp.Service.IReportServices.Reports
 {
     public static partial class Reporte
     {
-        public async static Task<object> GetReporteUtilidadRapid(string strdate, User aUser, databaseContext _context, IHostingEnvironment _env, IReportService _reportService, bool onlyClientsAgency = false)
+        public async static Task<object> GetReporteUtilidadRapid(string strdate, User aUser, databaseContext _context, IWebHostEnvironment _env, IReportService _reportService, bool onlyClientsAgency = false)
         {
             var aAgency = _context.Agency.Where(x => x.AgencyId == aUser.AgencyId);
 
@@ -3136,7 +3136,7 @@ namespace Agenciapp.Service.IReportServices.Reports
             }
         }
 
-        public async static Task<object> GetReporteUtilidad(string strdate, User aUser, databaseContext _context, IHostingEnvironment _env, IReportService _reportService, bool onlyClientsAgency = false)
+        public async static Task<object> GetReporteUtilidad(string strdate, User aUser, databaseContext _context, IWebHostEnvironment _env, IReportService _reportService, bool onlyClientsAgency = false)
         {
             var aAgency = _context.Agency.Where(x => x.AgencyId == aUser.AgencyId);
 

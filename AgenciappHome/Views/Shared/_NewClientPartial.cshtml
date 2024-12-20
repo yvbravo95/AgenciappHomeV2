@@ -1,0 +1,142 @@
+﻿@{
+    Agency agency = @ViewBag.agency;
+}
+
+<button type="button" id="nuevoCliente" class="btn btn-primary mr-1 mb-1" style="margin-left: 15px;" data-toggle="modal" data-placement="top" data-original-title="Nuevo cliente" data-target="#nuevoClienteModal">
+    <i class="ft-user-plus"> Nuevo Cliente</i>
+</button>
+<!-- Modal -->
+<div class="modal fade text-xs-left" id="nuevoClienteModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel1" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+                <h4 class="modal-title" id="myModalLabel1">Nuevo Cliente</h4>
+            </div>
+            <div class="modal-body" style="margin-left: 20px; margin-right: 20px">
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Nombre</b> <span class="required red">*</span></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input name="Name" id="Name" class="form-control" type="text" placeholder="Nombre">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Segundo Nombre</b></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input name="Name2" id="Name2" class="form-control" type="text" placeholder="Nombre">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Primer Apellido</b> <span class="required red">*</span></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input name="Lastname" id="Lastname" class="form-control" type="text" placeholder="Apellido">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Segundo Apellidos</b></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input name="Lastname2" id="Lastname2" class="form-control" type="text" placeholder="Apellido">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Teléfono</b> <span class="required red">*</span></label>
+                        <fieldset style="margin-bottom:5px;" class="form-group position-relative has-icon-left">
+                            <input name="Phone" id="Phone" class="form-control" type="text" placeholder="Teléfono">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Email</b></label>
+                        <fieldset style="margin-bottom:5px;" class="form-group position-relative has-icon-left">
+                            <input name="Email" id="Email" class="form-control" type="email" placeholder="Email">
+                        </fieldset>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="form-group">
+                            <label><b>Fecha de Nacimiento</b></label>
+                            <div class="input-group date" data-input="fechaNac">
+                                <input type="text" class="form-control date-input" />
+                                <span class="input-group-addon"><span class="fa fa-calendar"></span></span>
+                            </div>
+                            <input type="date" hidden name="fechaNac" id="fechaNac" />
+                            <span style="color:red">(mm/dd/aaaa)</span>
+                        </div>                        
+                    </div>
+                </div>
+                <div style="margin-top:10px;margin-bottom:10px;" class="form-group ">
+                    <div style="background-color: #CCC; height: 1px;"></div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>ID</b></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input name="CliID" id="ID" class="form-control" type="text" placeholder="Número Id">
+                        </fieldset>
+                    </div>
+                    @*<div class="col-md-6">
+                        <label><b>Teléfono Cuba</b></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input name="phoneCuba" id="phoneCuba" class="form-control" type="text" placeholder="Teléfono en Cuba">
+                        </fieldset>
+                    </div>*@
+                </div>
+                <div class="row">
+
+                    <div class="col-md-6">
+                        <label><b>Estado</b></label>
+                        <div class="form-group ">
+                            <fieldset style="margin-bottom:5px;" class="form-group position-relative has-icon-left">
+                                <select class="form-control" name="State" id="Clientstate" style="width:100%" placeholder="Estado">
+                                    <option></option>
+                                </select>
+                            </fieldset>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Ciudad</b></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <select name="City" id="Clientcity" class="form-control" style="width:100%" placeholder="Ciudad">
+                                <option></option>
+                            </select>
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-6">
+                        <label><b>Dirección</b></label>
+                        <div class="form-group  ">
+                            <textarea placeholder="Dirección" name="Address" id="Address" class="form-control"></textarea>
+                            <span class="text-danger field-validation-valid" data-valmsg-for="Address" data-valmsg-replace="true"></span>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <label><b>Código Postal</b></label>
+                        <fieldset class="form-group position-relative has-icon-left">
+                            <input name="Zip" id="Zip" class="form-control" type="text" placeholder="Zip">
+                        </fieldset>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="demo col-md-12 col-xs-12">
+                        <input type="checkbox" id="acepto" name="acepto" checked="checked">
+                        <label><span id="aceptoS"></span> ¿Desea recibir información sobre los servicios de la agencia @if (agency != null){ @agency.Name }, así como alertas y notificaciones del servicio recibido en cuestión por mensaje de texto? </label>
+                    </div>
+                </div>
+
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger btn-min-width mr-1 mb-1" id="cancelarNuevoCliente" data-dismiss="modal">
+                    <i class="ft-x"></i> Cancelar
+                </button>
+                <button type="button" class="btn btn-success btn-min-width mr-1 mb-1" id="guardarNuevoCliente" data-dismiss="modal">
+                    <i class="fa fa-check-square-o"></i> Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
