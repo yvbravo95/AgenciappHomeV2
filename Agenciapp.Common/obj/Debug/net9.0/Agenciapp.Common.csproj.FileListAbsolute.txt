@@ -13,3 +13,4 @@
 /Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/obj/Debug/net9.0/refint/Agenciapp.Common.dll
 /Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/obj/Debug/net9.0/Agenciapp.Common.pdb
 /Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/obj/Debug/net9.0/ref/Agenciapp.Common.dll
+/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Common/obj/Debug/net9.0/Agenciapp.Common.sourcelink.json

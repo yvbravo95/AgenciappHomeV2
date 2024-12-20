@@ -1,0 +1,31 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+   <ItemGroup>
+    <ProjectReference Include="..\Agenciapp.ApiClient\Agenciapp.ApiClient.csproj" />
+    <ProjectReference Include="..\Agenciapp.Common\Agenciapp.Common.csproj" />
+    <ProjectReference Include="..\Agenciapp.Domain\Agenciapp.Domain.csproj" />
+  </ItemGroup>
+
+   <ItemGroup>
+     <PackageReference Include="AuthorizeNet" Version="2.0.0" />
+     <PackageReference Include="AutoMapper" Version="13.0.1" />
+     <PackageReference Include="AWSSDK.Translate" Version="3.7.400.67" />
+     <PackageReference Include="EPPlus" Version="5.8.3" />
+     <PackageReference Include="FirebaseAdmin" Version="2.2.0" />
+     <PackageReference Include="GraphQL.Client" Version="6.1.0" />
+     <PackageReference Include="GraphQL.Client.Abstractions" Version="6.1.0" />
+     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="6.1.0" />
+     <PackageReference Include="HtmlAgilityPack" Version="1.11.71" />
+     <PackageReference Include="iTextSharp" Version="5.5.13.4" />
+     <PackageReference Include="NPOI" Version="2.5.5" />
+     <PackageReference Include="Sieve" Version="2.5.5" />
+     <PackageReference Include="Stripe.net" Version="47.2.0" />
+   </ItemGroup>
+
+</Project>

@@ -12,3 +12,4 @@
 /Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/obj/Debug/net9.0/Agenciapp.Domain.pdb
 /Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/obj/Debug/net9.0/Agenciapp.Domain.genruntimeconfig.cache
 /Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/obj/Debug/net9.0/ref/Agenciapp.Domain.dll
+/Users/yuniervelazcobravo/Documents/GitHub/Agenciapp.WebApp_V2/AgenciappHome/Agenciapp.Domain/obj/Debug/net9.0/Agenciapp.Domain.sourcelink.json
