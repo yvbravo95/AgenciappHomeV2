@@ -1,0 +1,22 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
+
+namespace AgenciappHome.Models
+{
+    public class MinoristaOtrosServ
+    {
+        [Key]
+        public Guid Id { get; set; }
+
+        public Guid AgencyId { get; set; }
+        
+        public Agency Agency { get; set; }
+
+        public string Name { get; set; }
+
+        public string Description { get; set; }
+    }    
+}

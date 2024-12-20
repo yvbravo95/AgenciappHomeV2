@@ -1,0 +1,34 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AgenciappHome", "AgenciappHome\AgenciappHome.csproj", "{E71E825E-5A5A-4D18-857C-77ABE537CE23}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenciapp.Common", "Agenciapp.Common\Agenciapp.Common.csproj", "{5397C1C7-CC02-4F49-8DA1-E1671FA1ED89}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Agenciapp.Domain", "Agenciapp.Domain\Agenciapp.Domain.csproj", "{5234A0FA-411C-4926-8665-36267B8B2539}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E71E825E-5A5A-4D18-857C-77ABE537CE23}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E71E825E-5A5A-4D18-857C-77ABE537CE23}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E71E825E-5A5A-4D18-857C-77ABE537CE23}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E71E825E-5A5A-4D18-857C-77ABE537CE23}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5397C1C7-CC02-4F49-8DA1-E1671FA1ED89}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5397C1C7-CC02-4F49-8DA1-E1671FA1ED89}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5397C1C7-CC02-4F49-8DA1-E1671FA1ED89}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5397C1C7-CC02-4F49-8DA1-E1671FA1ED89}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5234A0FA-411C-4926-8665-36267B8B2539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5234A0FA-411C-4926-8665-36267B8B2539}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5234A0FA-411C-4926-8665-36267B8B2539}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5234A0FA-411C-4926-8665-36267B8B2539}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
